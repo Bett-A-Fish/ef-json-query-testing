@@ -10,6 +10,7 @@ namespace ef_json_query_testing
         private readonly EfTestDbContext _context;
 
         private const int Take_Count = 100;
+        private const int Max_String_Length = 500;
 
         public SearchService(EfTestDbContext context)
         {
@@ -164,13 +165,14 @@ namespace ef_json_query_testing
                 hasSearchField = true;
 
                 var jsonPath = $"$.\"{field.DynamicFieldId}\"";
+                var sqlDataType = field.DataType.GetSqlType();
                 if (field.DataType == DataTypes.StringValue)
                 {
-                    query = query.Where(q => EF.Functions.JsonValue(q.Details, jsonPath).Contains(searchField.Value));
+                    query = query.Where(q => EF.Functions.Convert(sqlDataType, EF.Functions.JsonValue(q.Details, jsonPath)).Contains(searchField.Value));
                 }
                 else
                 {
-                    query = query.Where(q => EF.Functions.JsonValue(q.Details, jsonPath) == searchField.Value);
+                    query = query.Where(q => EF.Functions.Convert(sqlDataType, EF.Functions.JsonValue(q.Details, jsonPath)) == searchField.Value);
                 }
             }
 

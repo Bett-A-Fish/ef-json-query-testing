@@ -49,7 +49,7 @@ namespace ef_json_query_testing.Translators
         {
             // this does not work and I don't know why
             //services.TryAddSingleton<IMethodCallTranslatorProvider, CustomSqlServerMethodCallTranslatorPlugin>(); 
-            
+
             services.AddScoped<IMethodCallTranslatorProvider, JsonQueryTranslatorPlugin>();
         }
 
@@ -73,6 +73,7 @@ namespace ef_json_query_testing.Translators
             public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) => false;
         }
     }
+
     public static class SqlServerDbContextOptionsBuilderExtensions
     {
         public static DbContextOptionsBuilder UseJsonFunctions(
