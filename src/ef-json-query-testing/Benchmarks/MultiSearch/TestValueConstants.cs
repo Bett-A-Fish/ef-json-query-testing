@@ -49,6 +49,19 @@
                 { 13 , "exercitationem laboriosam aspernatur" },
             };
 
+        public static Dictionary<int, string> first_both_date_int_bool = new Dictionary<int, string>()
+        {
+            { 8, "2" },
+            { 10, "3" },
+            { 16, "5444-11-13 10:00:42.0000000" },
+            { 17, "7294-10-30 08:03:45.0000000" },
+            { 21, "6602-08-31 14:33:39.0000000" },
+            { 26, "False" },
+            { 33, "False" },
+            { 37, "0852-10-11 08:07:55.0000000" },
+            { 45, "3345-08-11 07:18:16.0000000" }
+        };
+
         public static Dictionary<int, string> Last_both_int_bool = new Dictionary<int, string>() {
                 { 4 , "13" }, //optional
                 { 6 , "7" }, //optional
@@ -103,6 +116,31 @@
         public static Dictionary<int, string> set1_req_string_single = new Dictionary<int, string>() {
                 { 13 , "exercitationem laboriosam" },
             };
+
+
+        public static Dictionary<int, string> set1_req_date = new Dictionary<int, string>()
+        {
+            { 16, "5444-11-13 10:00:42.0000000" },
+            { 17, "7294-10-30 08:03:45.0000000" },
+            { 37, "0852-10-11 08:07:55.0000000" }
+        };
+
+
+        public static Dictionary<int, string> set1_op_date = new Dictionary<int, string>()
+        {
+            { 21, "6602-08-31 14:33:39.0000000" },
+            { 45, "3345-08-11 07:18:16.0000000" }
+        };
+
+
+        public static Dictionary<int, string> set1_both_date = new Dictionary<int, string>()
+        {
+            { 16, "5444-11-13 10:00:42.0000000" },
+            { 17, "7294-10-30 08:03:45.0000000" },
+            { 21, "6602-08-31 14:33:39.0000000" },
+            { 37, "0852-10-11 08:07:55.0000000" },
+            { 45, "3345-08-11 07:18:16.0000000" }
+        };
 
         public static Dictionary<int, string> set2_both_int_bool = new Dictionary<int, string>() {
                 { 4 , "13" }, //optional
