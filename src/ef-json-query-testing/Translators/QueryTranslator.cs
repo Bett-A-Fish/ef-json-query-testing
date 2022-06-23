@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.SqlServer.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ef_json_query_testing.Translators
 {
@@ -26,7 +19,7 @@ namespace ef_json_query_testing.Translators
         public static DateTime DateConvert(this DbFunctions _, string convertDate) => throw new InvalidOperationException();
     }
 
-    public class QueryJsonTranslator : IMethodCallTranslator
+    public class QueryTranslator : IMethodCallTranslator
     {
         private readonly ISqlExpressionFactory _expressionFactory;
 
@@ -41,7 +34,7 @@ namespace ef_json_query_testing.Translators
                 nameof(QueryConversionExtensions.DateConvert),
                 new[] { typeof(DbFunctions), typeof(string) })!;
 
-        public QueryJsonTranslator(ISqlExpressionFactory expressionFactory)
+        public QueryTranslator(ISqlExpressionFactory expressionFactory)
         {
             _expressionFactory = expressionFactory;
         }
@@ -71,14 +64,12 @@ namespace ef_json_query_testing.Translators
             }
             else if (method == _dateConvertMethod)
             {
-                //CONVERT(dataType, valueToConvert, ConvertStyle)
-
                 var sqlType = _expressionFactory.Fragment("DATETIME2");
                 var sqlConvertStyle = _expressionFactory.Constant(127);
 
                 var functionArguments = new List<SqlExpression> { sqlType, arguments[1], sqlConvertStyle };
 
-                var thing =  _expressionFactory.Function("CONVERT",
+                var thing = _expressionFactory.Function("CONVERT",
                     functionArguments,
                     nullable: true,
                     argumentsPropagateNullability: functionArguments.Select(_ => false).ToList(),

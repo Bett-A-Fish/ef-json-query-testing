@@ -12,10 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 namespace ef_json_query_testing.Translators
 {
 #pragma warning disable EF1001
-    public sealed class JsonQueryTranslatorPlugin : SqlServerMethodCallTranslatorProvider
+    public sealed class QueryTranslatorPlugin : SqlServerMethodCallTranslatorProvider
 #pragma warning restore EF1001
     {
-        public JsonQueryTranslatorPlugin(RelationalMethodCallTranslatorProviderDependencies dependencies)
+        public QueryTranslatorPlugin(RelationalMethodCallTranslatorProviderDependencies dependencies)
 #pragma warning disable EF1001
             : base(dependencies)
 #pragma warning restore EF1001
@@ -24,7 +24,7 @@ namespace ef_json_query_testing.Translators
 
             AddTranslators(new List<IMethodCallTranslator>
             {
-                new QueryJsonTranslator(expressionFactory)
+                new QueryTranslator(expressionFactory)
             });
         }
     }
@@ -50,7 +50,7 @@ namespace ef_json_query_testing.Translators
             // this does not work and I don't know why
             //services.TryAddSingleton<IMethodCallTranslatorProvider, CustomSqlServerMethodCallTranslatorPlugin>(); 
             
-            services.AddScoped<IMethodCallTranslatorProvider, JsonQueryTranslatorPlugin>();
+            services.AddScoped<IMethodCallTranslatorProvider, QueryTranslatorPlugin>();
         }
 
         private sealed class MyDbContextOptionsExtensionInfo : DbContextOptionsExtensionInfo
