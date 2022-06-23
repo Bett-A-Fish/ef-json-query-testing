@@ -208,7 +208,7 @@ namespace ef_json_query_testing
                 {
 
                     var val = DateTime.Parse(searchField.Value);
-                    query = query.Where(m => m.DynamicMediaInformation.Any(i => i.FieldId == field.DynamicFieldId && EF.Functions.DateConvert(i.Value) == val));
+                    query = query.Where(m => m.DynamicMediaInformation.Any(i => i.FieldId == field.DynamicFieldId && EF.Functions.DateConvert(i.Value) >= val));
                 }
                 else
                 {

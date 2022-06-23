@@ -73,7 +73,7 @@ namespace ef_json_query_testing.Translators
             {
                 //CONVERT(dataType, valueToConvert, ConvertStyle)
 
-                var sqlType = _expressionFactory.Constant(DbType.DateTime2);
+                var sqlType = _expressionFactory.Fragment("DATETIME2");
                 var sqlConvertStyle = _expressionFactory.Constant(127);
 
                 var functionArguments = new List<SqlExpression> { sqlType, arguments[1], sqlConvertStyle };
