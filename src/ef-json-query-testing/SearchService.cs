@@ -126,7 +126,7 @@ namespace ef_json_query_testing
                 }
 
 
-                sqlStatement += field.DataType == DataTypes.StringValue ? " LIKE " : field.DataType == DataTypes.DateTimeValue ? " > " : " = ";
+                sqlStatement += field.DataType == DataTypes.StringValue ? " LIKE " : field.DataType == DataTypes.DateTimeValue ? " >= " : " = ";
                 sqlStatement += "{" + count + "}";
 
                 count++;
