@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ef_json_query_testing.Benchmarks.MultiSearch
+namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
 {
     public class ColumnCountBenchmarks : BaseBenchmark
     {

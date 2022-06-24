@@ -3,7 +3,7 @@ using Bogus;
 using ef_json_query_testing.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace ef_json_query_testing.Benchmarks
+namespace ef_json_query_testing.Benchmarks.MultiSearch.RandomValueTests
 {
     public class FewFieldsBenchmarks : BaseBenchmark
     {

@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace ef_json_query_testing.Benchmarks.MultiSearch
+namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
 {
     public class DateFieldBenchmarks : BaseBenchmark
     {

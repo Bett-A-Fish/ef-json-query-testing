@@ -1,4 +1,4 @@
-﻿namespace ef_json_query_testing.Benchmarks
+﻿namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
 {
     public static class TestValueConstants
     {
