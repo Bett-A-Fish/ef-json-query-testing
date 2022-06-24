@@ -74,23 +74,24 @@ namespace ef_json_query_testing
                 hasSearchField = true;
 
                 parameters.Add($"$.\"{field.DynamicFieldId}\"");
-                sqlStatement += $" AND JSON_VALUE([Details], {{{count}}}) ";
+                var jsonValueStatement = $" JSON_VALUE([Details], {{{count}}}) ";
                 count++;
 
                 if (field.DataType == DataTypes.StringValue)
                 {
                     var containsString = "%" + searchField.Value + "%";
                     parameters.Add(containsString);
-                    sqlStatement += $" LIKE {{{count}}}";
+                    sqlStatement += " AND " + jsonValueStatement + $" LIKE {{{count}}} ";
                 }
                 else if (field.DataType == DataTypes.DateTimeValue)
                 {
-
+                    parameters.Add(searchField.Value);
+                    sqlStatement += $" AND CONVERT(DATETIME2, {jsonValueStatement}, 127) >= {{{count}}} ";
                 }
                 else
                 {
                     parameters.Add(searchField.Value);
-                    sqlStatement += $" = {{{count}}}";
+                    sqlStatement += " AND " + jsonValueStatement + $" = {{{count}}} ";
                 }
 
                 count++;
@@ -98,12 +99,13 @@ namespace ef_json_query_testing
 
             if (hasSearchField)
             {
-                return _context.Media_Json
+                var list = _context.Media_Json
                 .FromSqlRaw(sqlStatement, parameters.ToArray())
                 .AsNoTracking()
                 .OrderBy(m => m.Media_JsonId)
-                .Take(Take_Count)
-                .ToList();
+                .Take(Take_Count);
+
+                return list.ToList();
             }
             else
             {
