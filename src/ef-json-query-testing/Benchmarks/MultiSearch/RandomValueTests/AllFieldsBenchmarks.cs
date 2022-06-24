@@ -2,7 +2,7 @@
 using Bogus;
 using Microsoft.EntityFrameworkCore;
 
-namespace ef_json_query_testing.Benchmarks
+namespace ef_json_query_testing.Benchmarks.MultiSearch.RandomValueTests
 {
     public class AllFieldsBenchmarks : BaseBenchmark
     {

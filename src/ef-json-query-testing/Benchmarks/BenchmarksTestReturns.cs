@@ -1,4 +1,5 @@
-﻿using ef_json_query_testing.Models;
+﻿using ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests;
+using ef_json_query_testing.Models;
 
 namespace ef_json_query_testing.Benchmarks
 {

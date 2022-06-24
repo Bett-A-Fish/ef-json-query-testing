@@ -4,7 +4,7 @@ using ef_json_query_testing.Enums;
 using ef_json_query_testing.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ef_json_query_testing.Benchmarks
+namespace ef_json_query_testing.Benchmarks.MultiSearch.RandomValueTests
 {
     public class StringFieldsBenchmarks : BaseBenchmark
     {
