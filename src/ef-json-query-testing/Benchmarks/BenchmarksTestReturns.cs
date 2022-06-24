@@ -2,7 +2,7 @@
 
 namespace ef_json_query_testing.Benchmarks
 {
-    public class LessRandomBenchmarksTestReturns : BaseBenchmark
+    public class BenchmarksTestReturns : BaseBenchmark
     {
         public void TestSearch()
         {
