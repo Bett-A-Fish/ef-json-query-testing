@@ -169,6 +169,93 @@ namespace ef_json_query_testing
             return list;
         }
 
+        public List<Media_Json> JsonSearch_Indexed_NoColumns_StringAdjustment(Dictionary<int, string> searchFields, bool throwOnNoResults = true)
+        {
+            if (searchFields == null || !searchFields.Any())
+            {
+                return new List<Media_Json>();
+            }
+
+            var tableSearchFields = new List<SearchFields>();
+
+            var fieldList = _context.DynamicFields.AsNoTracking().ToList();
+            var hasSearchField = false;
+            var searchValues = new List<string>();
+            var sqlColumns = " [Media_JsonId] ,[UploadDate] ,[OriginalFileName] ,[FilePath] ,[CreatedDate] ,[FileSize] ,[FileWidth] ,[FileHeight] ,[Description] ,[Hold], [Details] ";
+            var sqlStatement = "SELECT " + sqlColumns + " FROM [dbo].[Media_Json] WHERE 1=1 ";
+            var count = 0;
+            foreach (var searchField in searchFields)
+            {
+                var field = fieldList.FirstOrDefault(f => f.DynamicFieldId == searchField.Key);
+                if (field == null)
+                {
+                    continue;
+                }
+                hasSearchField = true;
+
+                searchValues.Add(field.DataType == DataTypes.StringValue ? "%" + searchField.Value + "%" : searchField.Value);
+
+                var valueType = field.DataType.GetSqlType(Max_String_Length);
+                var jsonKey = $"$.\"{searchField.Key}\"";
+                var jsonValue = " JSON_VALUE([Details], '" + jsonKey + "') ";
+                if (field.DataType == DataTypes.DateTimeValue)
+                {
+                    sqlStatement += " AND CONVERT(" + valueType + ", " + jsonValue + ", 127)";
+                }
+                else if (!field.IsRequired && field.DataType == DataTypes.StringValue)
+                {
+                    sqlStatement += " AND " + jsonValue + " IS NOT NULL ";
+                    sqlStatement += " AND CONVERT(" + valueType + ", " + jsonValue + ")";
+                }
+                else
+                {
+                    sqlStatement += " AND CONVERT(" + valueType + ", " + jsonValue + ")";
+                }
+
+
+                sqlStatement += field.DataType == DataTypes.StringValue ? " LIKE " : field.DataType == DataTypes.DateTimeValue ? " >= " : " = ";
+                sqlStatement += "{" + count + "}";
+
+                count++;
+            }
+
+            List<Media_Json> list;
+            if (hasSearchField)
+            {
+                var q = _context.Media_Json
+                    .FromSqlRaw(sqlStatement, searchValues.ToArray())
+                    .AsNoTracking()
+                    .Select(q => new Media_Json()
+                    {
+                        Media_JsonId = q.Media_JsonId,
+                        UploadDate = q.UploadDate,
+                        OriginalFileName = q.OriginalFileName,
+                        FilePath = q.FilePath,
+                        CreatedDate = q.CreatedDate,
+                        FileSize = q.FileSize,
+                        FileWidth = q.FileWidth,
+                        FileHeight = q.FileHeight,
+                        Description = q.Description,
+                        Hold = q.Hold
+                    })
+                    .OrderBy(m => m.Media_JsonId)
+                    .Take(Take_Count);
+
+                list = q.ToList();
+            }
+            else
+            {
+                list = new List<Media_Json>();
+            }
+
+            if (!list.Any() && throwOnNoResults)
+            {
+                throw new Exception("No items found");
+            }
+
+            return list;
+        }
+
         #endregion
 
 
