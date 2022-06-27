@@ -66,7 +66,7 @@ namespace ef_json_query_testing.Seeders
         public static void LoadSharedData_StringOnly(EfTestDbContext context, int halfFieldCount = 20)
         {
             var randomFields = FakerDynamicField_StringRequired.Generate(halfFieldCount);
-            randomFields.AddRange(FakerDynamicField_StringRequired.Generate(halfFieldCount));
+            randomFields.AddRange(FakerDynamicField_StringOptional.Generate(halfFieldCount));
 
             context.DynamicFields.AddRange(randomFields);
             context.SaveChanges();
