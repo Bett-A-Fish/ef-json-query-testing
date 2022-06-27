@@ -40,11 +40,34 @@ namespace ef_json_query_testing.Seeders
             LoadMediaData(context, mediaItemsCount);
         }
 
+        // using halfFieldCount for how many fields should be made for optional and required groups (20 will end up with 40 total fields)
+        public static void LoadAllData_StringOnly(EfTestDbContext context, int mediaItemsCount = 500, int halfFieldCount = 20)
+        {
+            Randomizer.Seed = new Random(FakerSeed);
+            LoadSharedData_StringOnly(context, halfFieldCount);
+
+            LoadMediaData(context, mediaItemsCount);
+        }
+
         public static void LoadSharedData(EfTestDbContext context, int fieldsCount = 30, int listTypeCount = 5)
         {
             LoadDynamicListTypes(context, listTypeCount);
 
             var randomFields = FakerDynamicField.Generate(fieldsCount);
+            context.DynamicFields.AddRange(randomFields);
+            context.SaveChanges();
+
+            foreach (var field in randomFields)
+            {
+                AddJsonIndex(context, field.DynamicFieldId.ToString(), field.DataType);
+            }
+        }
+
+        public static void LoadSharedData_StringOnly(EfTestDbContext context, int halfFieldCount = 20)
+        {
+            var randomFields = FakerDynamicField_StringRequired.Generate(halfFieldCount);
+            randomFields.AddRange(FakerDynamicField_StringRequired.Generate(halfFieldCount));
+
             context.DynamicFields.AddRange(randomFields);
             context.SaveChanges();
 
@@ -65,12 +88,39 @@ namespace ef_json_query_testing.Seeders
             LoadMediaJson(context);
         }
 
+        public static void LoadMediaDataLarge(EfTestDbContext context, int mediaItemsCount = 1000)
+        {
+            context.Media_Dynamic.AddRange(FakerMedia_Dynamic.Generate(mediaItemsCount));
+            context.SaveChanges();
+
+
+            LoadMediaInformationLarge(context);
+
+            LoadMediaJson(context);
+        }
+
         public static Faker<DynamicField> FakerDynamicField => new Faker<DynamicField>()
             .RuleFor(d => d.DisplayName, f => string.Join(" ", f.Lorem.Words()))
             .RuleFor(d => d.IsQueryable, f => f.Random.Bool())
             .RuleFor(d => d.IsRequired, f => f.Random.Bool())
             .RuleFor(d => d.Description, f => f.Lorem.Paragraph())
             .RuleFor(d => d.DataType, f => f.Random.Enum<DataTypes>());
+
+
+        public static Faker<DynamicField> FakerDynamicField_StringRequired => new Faker<DynamicField>()
+            .RuleFor(d => d.DisplayName, f => string.Join(" ", f.Lorem.Words()))
+            .RuleFor(d => d.IsQueryable, f => f.Random.Bool())
+            .RuleFor(d => d.IsRequired, f => true)
+            .RuleFor(d => d.Description, f => f.Lorem.Paragraph())
+            .RuleFor(d => d.DataType, f => DataTypes.StringValue);
+
+
+        public static Faker<DynamicField> FakerDynamicField_StringOptional => new Faker<DynamicField>()
+            .RuleFor(d => d.DisplayName, f => string.Join(" ", f.Lorem.Words()))
+            .RuleFor(d => d.IsQueryable, f => f.Random.Bool())
+            .RuleFor(d => d.IsRequired, f => false)
+            .RuleFor(d => d.Description, f => f.Lorem.Paragraph())
+            .RuleFor(d => d.DataType, f => DataTypes.StringValue);
 
         public static Faker<Media_Dynamic> FakerMedia_Dynamic => new Faker<Media_Dynamic>()
             .RuleFor(m => m.OriginalFileName, f => f.System.FileName())
