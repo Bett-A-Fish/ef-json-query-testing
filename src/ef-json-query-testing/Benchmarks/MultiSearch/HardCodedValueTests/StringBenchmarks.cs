@@ -12,10 +12,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "one", "req")]
         public void Json_Req_One() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.One_Required);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "one", "req")]
-        public void Json_Adjusted_Req_One() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.One_Required);
-
 
 
         [Benchmark]
@@ -25,10 +21,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "two", "req")]
         public void Json_Req_Two() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Two_Required);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "two", "req")]
-        public void Json_Adjusted_Req_Two() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Two_Required);
 
 
 
@@ -40,10 +32,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "three", "req")]
         public void Json_Req_Three() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Three_Required);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "three", "req")]
-        public void Json_Adjusted_Req_Three() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Three_Required);
-
 
 
         [Benchmark]
@@ -53,10 +41,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "four", "req")]
         public void Json_Req_Four() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Four_Required);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "four", "req")]
-        public void Json_Adjusted_Req_Four() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Four_Required);
 
 
 
@@ -69,10 +53,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "five", "req")]
         public void Json_Req_Five() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Five_Required);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "five", "req")]
-        public void Json_Adjusted_Req_Five() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Five_Required);
-
 
 
         [Benchmark]
@@ -82,10 +62,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "six", "req")]
         public void Json_Req_Six() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Six_Required);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "six", "req")]
-        public void Json_Adjusted_Req_Six() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Six_Required);
 
 
 
@@ -97,10 +73,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "seven", "req")]
         public void Json_Req_Seven() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Seven_Required);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "seven", "req")]
-        public void Json_Adjusted_Req_Seven() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Seven_Required);
-
 
 
         [Benchmark]
@@ -110,10 +82,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "eight", "req")]
         public void Json_Req_Eight() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Eight_Required);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "eight", "req")]
-        public void Json_Adjusted_Req_Eight() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Eight_Required);
 
 
 
@@ -130,10 +98,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "one", "op")]
         public void Json_Op_One() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.One_Optional);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "one", "op")]
-        public void Json_Adjusted_Op_One() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.One_Optional);
-
 
 
 
@@ -145,10 +109,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "two", "op")]
         public void Json_Op_Two() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Two_Optional);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "two", "op")]
-        public void Json_Adjusted_Op_Two() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Two_Optional);
-
 
 
         [Benchmark]
@@ -159,10 +119,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "three", "op")]
         public void Json_Op_Three() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Three_Optional);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "three", "op")]
-        public void Json_Adjusted_Op_Three() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Three_Optional);
-
 
 
         [Benchmark]
@@ -172,10 +128,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "four", "op")]
         public void Json_Op_Four() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Four_Optional);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "four", "op")]
-        public void Json_Adjusted_Op_Four() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Four_Optional);
 
 
 
@@ -188,10 +140,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "five", "op")]
         public void Json_Op_Five() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Five_Optional);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "five", "op")]
-        public void Json_Adjusted_Op_Five() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Five_Optional);
-
 
 
         [Benchmark]
@@ -201,10 +149,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "six", "op")]
         public void Json_Op_Six() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Six_Optional);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "six", "op")]
-        public void Json_Adjusted_Op_Six() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Six_Optional);
 
 
 
@@ -216,10 +160,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "seven", "op")]
         public void Json_Op_Seven() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Seven_Optional);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "seven", "op")]
-        public void Json_Adjusted_Op_Seven() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Seven_Optional);
-
 
 
         [Benchmark]
@@ -229,10 +169,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "eight", "op")]
         public void Json_Op_Eight() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Eight_Optional);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "eight", "op")]
-        public void Json_Adjusted_Op_Eight() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Eight_Optional);
 
 
 
@@ -249,10 +185,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "two", "both")]
         public void Json_Both_Two() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Two_Both);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "two", "both")]
-        public void Json_Adjusted_Both_Two() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Two_Both);
-
 
 
 
@@ -265,10 +197,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "four", "both")]
         public void Json_Both_Four() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Four_Both);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "four", "both")]
-        public void Json_Adjusted_Both_Four() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Four_Both);
-
 
 
 
@@ -280,10 +208,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "six", "both")]
         public void Json_Both_Six() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Six_Both);
 
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "six", "both")]
-        public void Json_Adjusted_Both_Six() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Six_Both);
-
 
 
         [Benchmark]
@@ -293,10 +217,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [Benchmark]
         [BenchmarkCategory("json", "eight", "both")]
         public void Json_Both_Eight() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants.Eight_Both);
-
-        [Benchmark]
-        [BenchmarkCategory("json", "adjusted", "eight", "both")]
-        public void Json_Adjusted_Both_Eight() => Search.JsonSearch_Indexed_NoColumns_StringAdjustment(StringTestValueConstants.Eight_Both);
 
     }
 
