@@ -398,6 +398,8 @@ namespace ef_json_query_testing
         List<Media_Json> JsonSearch_Indexed(Dictionary<int, string> searchFields, bool throwOnNoResults = true);
 
         List<Media_Json> JsonSearch_Indexed_NoColumns(Dictionary<int, string> searchFields, bool throwOnNoResults = true);
+        
+        List<Media_Json> JsonSearch_Indexed_NoColumns_StringAdjustment(Dictionary<int, string> searchFields, bool throwOnNoResults = true);
 
 
 

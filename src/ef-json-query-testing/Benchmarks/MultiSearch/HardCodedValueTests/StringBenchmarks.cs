@@ -392,8 +392,8 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
                 { 35 , "ipsam" },
                 { 34 , "libero" },
                 { 33 , "dolorem" },
-                { 30 , "maiores" },
-                { 27 , "expedita" },
+                { 28 , "nihil" },
+                { 27 , "libero" },
             };
 
         public static Dictionary<int, string> Six_Optional = new Dictionary<int, string>() {
