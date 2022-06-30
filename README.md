@@ -2,11 +2,16 @@
 
 ## Contents
 
-1. [Data Model](#data-model)
-2. [Test Data](#test-data)
-3. [Search Patterns](#search-patterns)
-4. [Running](#running)
-5. [Results](#results)
+- [Entity Framework Vs Json Queries](#entity-framework-vs-json-queries)
+  - [Contents](#contents)
+  - [Data Model](#data-model)
+  - [Test Data](#test-data)
+    - [CreateBogusData.cs](#createbogusdatacs)
+  - [Search Patterns](#search-patterns)
+  - [Running](#running)
+    - [Additional notes](#additional-notes)
+  - [Results](#results)
+    - [Overview](#overview)
 
 ## Data Model
 
@@ -14,51 +19,49 @@ I'm using the below structure to mimic what an ad hock query builder could use f
 ![Ad hock query builder structure](readme%20files/dataModel/querybuilder.png)
 
 The structure for testing searching where each bit of information is saved as a seprate row in a table
-![Media table structure](readme%20files/dataModel/media.png)
+![Dynamic table structure](readme%20files/dataModel/media.png)
 
 The structure for testing searching with the information stored in JSON
 ![Json table structure](readme%20files/dataModel/json.png)
 
-Note: The table and json structures are separated into different models: `Media_Dynamic` and `Media_Json`
+Note: The dynamic table and json structures are separated into different models: `Media_Dynamic` and `Media_Json`
+
+Sad Note: At some point `Media_Dynamic` started getting refered to as just media. While `Media_Json` is refered to as json. Tying to get this cleaned up.
 
 ## Test Data
 
-I'm using [Bogus](https://github.com/bchavez/Bogus) with a hardcoded seed value to easily create lots of consistent semi-realistic looking data to add into the above data structures. `Media_Dynamic` is created then a selection of `DynamicFields` are used to generate data for the media item into `DynamicMediaInformation`. When all items for `Media_Dynmic` are done, this information is duplicated into `Media_Json` to reduce variables when testing search patterns.
+I'm using [Bogus](https://github.com/bchavez/Bogus) with a hardcoded seed value to easily create lots of consistent semi-realistic looking data to add into the above data structures. `Media_Dynamic` is created then a selection of `DynamicFields` are used to generate data for the media item into `DynamicMediaInformation`. When all items for `Media_Dynamic` are done, this information is duplicated into `Media_Json` to reduce variables when testing search patterns.
 
-A large bacpac file that I used to benchmark these search patterns has been included `ef_testing_index_large.bacpac`. It has 100,000 generated rows of data. Or a new set can be generated with your own seed and data counts with `CreateBogusData.cs`
+Two large bacpac files have been included that were used to benchmark these search patterns: `ef_testing_index_large.bacpac` and `ef_testing_string_large.bacpac`. The first uses a generated list of 50 different fields including the types: int, bool, date, string. The second is 40 fields of only strings. Both have 100,000 generated rows of data. A new set can be generated with your own seed and data counts using `CreateBogusData.cs`
 
 ### CreateBogusData.cs
 
 The field `FakerSeed` is the seed used for generating the bogus data.
 
-`LoadAllData` Can be called to fill the whole database in one go. (`fieldsCount`) Generating the list of available dynamic fields each datarow has available with random datatypes and if required or not. (`mediaItemsCount`) Generating the total count of datarows to be able to search over. (`listTypeCount`) For generating some dropdown types and the list of options available for each.
+`LoadAllData` Can be called to fill the whole database in one go. `fieldsCount` Will be the list of available dynamic fields each datarow has available with random datatypes and sets if the fields are required or optional. `mediaItemsCount` Is the total number of datarows to be able to search over which will be created for one table structure and duplicated into the other. `listTypeCount` For generating some dropdown types and the list of options available for each.
 
 `LoadSharedData` Loads the data for the ad hock query builder portion of the database. Filling out the available fields a datarow can contain. The parameters are the same as above.
 
-`LoadMediaData` Loads the data for the Media and Json tables for running searches against. First it will create data for the media table, then copy that data into the json table.
+`LoadMediaData` Loads the data for the Dynamic and Json tables for running searches against. First it will create data for the dynamic table, then copy that data into the json table.
 
-Some extra private "large" versions of methods are included that I used to generate the massive bacpac file that has been included. These were only temporarily called and are not currently used.
+Some extra private "large" versions of methods are included that I used to generate the massive bacpac files that have been included. These were only temporarily called and are not currently used. (Needed to pause regularly for my laptop to cool down.)
 
 ## Search Patterns
 
-Multiple search pattern types were created to see what varients were most efficient. The intent is to see how each handles different search patterns, however all of the below are currently only setup to handle a basic `AND` search rather than the full query builder outlined above. For each pattern, unit tests were added to allow easily checking their validity along with how they each handle bad user input using [NaughtyStrings](https://github.com/SimonCropp/NaughtyStrings).
+Multiple search pattern types were created to see what varients were most efficient. The intent is to see how each handles different search patterns, however all of the below are currently only setup to handle a basic `AND` search rather than the full query builder outlined above. For each pattern, unit tests were added to allow easily checking their validity along with how they each handle bad user input using [NaughtyStrings](https://github.com/SimonCropp/NaughtyStrings). As benchmarking has progressed, more varients have been added and older ones deemed consistently worse than similar counterparts were moved out of the way into `SearchServiceOld.cs`.
 
 - Json - using Raw sql.
   - Creates a sql query to have EF run.
-  - Has single and multi selected field variants.
   - Uses parametrized values to avoid sql injection.
 - Json - using EF magic
   - Through custom EF functions, a query is generated.
-  - Has single and multi selected field variants.
 - Json - with indexs
   - Creates a sql query to have EF run that will properly utilize indexing
-  - Multi select variant only.
+    - Note: the testing is setup to make an index for each field but the intention for a production environment would be to only add indexing to the needed fields.
 - Dynamic table - through `DynamicMediaInformation`
   - Uses EF to search through `DynamicMediaInformation` table to find `Media_Dynamic` rows that fit the given criteria.
-  - single select variant only.
 - Dynamic table - through `Media_Dynamic`
   - Uses EF to search through `Media_Dynamic`'s connected `DynamicMediaInformation` rows to find media items that match given criteria.
-  - Has single and multi selected field variants.
 
 ## Running
 
@@ -78,7 +81,7 @@ For running a proper benchmark test:
 ```C#
 BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly)
             .Run(args, DefaultConfig.Instance
-                //.AddFilter(new AnyCategoriesFilter(new string[] { "indexed", "media" }))
+                //.AddFilter(new AnyCategoriesFilter(new string[] { "indexed" }))
                 //.AddFilter(new AllCategoriesFilter(new string[] { "lessrand", "set1" }))
                 .AddExporter(RPlotExporter.Default)
                 .AddColumn(CategoriesColumn.Default)
@@ -99,7 +102,9 @@ Unit tests are included to make sure each search works as expected and can handl
 
 ## Results
 
-The below results utilize the included bacpac file and use the `LessRandomBenchmarks.cs` benchmarks. Which is a set of hardcoded test data with the aim of getting specific sets of data. It uses only two of the listed search patterns that turned out to be the fastest overall for their individual groups. `JsonSearch_Indexed` for the json table structure and `TableSearch_Media` for the media table structure. With a set of categories of `first`, `last`, `set1`, and `set2`.
+### Overview
+
+The below results utilize the included bacpac file and use the `LessRandomBenchmarks.cs` benchmarks. Which is a set of hardcoded test data with the aim of getting specific sets of data. It uses only two of the listed search patterns that turned out to be the fastest overall for their individual groups. `JsonSearch_Indexed` for the json table structure and `TableSearch_Media` for the dynamic table structure. With a set of categories of `first`, `last`, `set1`, and `set2`.
 
 - `first` - given search values to find the first item in the table
 - `last` - given search values to find the last item in the table
