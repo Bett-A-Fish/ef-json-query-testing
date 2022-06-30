@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.DateFieldBenchmarks-20220624-105521</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                              Method</th><th>                   Categories</th><th>Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>Indexed_first_both_date_int_bool</td><td>json,hascolumns,indexed,first,dates</td><td>15.46 ms</td><td>0.304 ms</td><td>0.547 ms</td>
+</tr><tr><td>Media_first_both_date_int_bool</td><td>table,hascolumns,media,first,dates</td><td>406.55 ms</td><td>5.210 ms</td><td>4.351 ms</td>
+</tr><tr><td>Indexed_noColumns_first_both_date_int_bool</td><td>json,nocolumns,indexed,first,dates</td><td>15.07 ms</td><td>0.298 ms</td><td>0.446 ms</td>
+</tr><tr><td>Media_noColumns_first_both_date_int_bool</td><td>table,nocolumns,media,first,dates</td><td>398.38 ms</td><td>5.232 ms</td><td>4.638 ms</td>
+</tr></tbody></table>
+</body>
+</html>

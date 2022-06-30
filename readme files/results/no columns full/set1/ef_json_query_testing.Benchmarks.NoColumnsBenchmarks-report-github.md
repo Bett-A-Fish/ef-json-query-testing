@@ -1,0 +1,36 @@
+``` ini
+
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+
+
+```
+|                                   Method |                       Categories |          Mean |         Error |        StdDev |
+|----------------------------------------- |--------------------------------- |--------------:|--------------:|--------------:|
+|               Indexed_set1_both_int_bool |     json,hascolumns,indexed,set1 |     12.186 ms |     0.2398 ms |     0.2665 ms |
+|                 Media_set1_both_int_bool |      table,hascolumns,media,set1 |    145.070 ms |     2.5972 ms |     3.0917 ms |
+|                Indexed_set1_req_int_bool |     json,hascolumns,indexed,set1 |     17.135 ms |     0.3383 ms |     0.5064 ms |
+|                  Media_set1_req_int_bool |      table,hascolumns,media,set1 |    271.996 ms |     4.8273 ms |     4.2793 ms |
+|                      Indexed_set1_op_int |     json,hascolumns,indexed,set1 |      7.768 ms |     0.1404 ms |     0.1313 ms |
+|                        Media_set1_op_int |      table,hascolumns,media,set1 |     72.571 ms |     1.0938 ms |     0.9696 ms |
+|                  Indexed_set1_req_string |     json,hascolumns,indexed,set1 |    420.444 ms |     8.3722 ms |     7.8313 ms |
+|                    Media_set1_req_string |      table,hascolumns,media,set1 |    169.146 ms |     3.3757 ms |     7.1939 ms |
+|            Indexed_set1_op_string_single |     json,hascolumns,indexed,set1 |  2,514.774 ms |    47.6085 ms |    44.5330 ms |
+|              Media_set1_op_string_single | table,hascolumns,media,set1,miss | 22,116.768 ms | 1,084.1167 ms | 3,145.2191 ms |
+|           Indexed_set1_req_string_single |     json,hascolumns,indexed,set1 |  1,404.229 ms |    23.8953 ms |    22.3517 ms |
+|             Media_set1_req_string_single | table,hascolumns,media,set1,miss | 29,306.243 ms |   579.0830 ms |   983.3268 ms |
+|     Indexed_noColumns_set1_both_int_bool |      json,nocolumns,indexed,set1 |      6.042 ms |     0.1145 ms |     0.2655 ms |
+|       Media_noColumns_set1_both_int_bool |       table,nocolumns,media,set1 |    135.077 ms |     1.3963 ms |     1.2378 ms |
+|      Indexed_noColumns_set1_req_int_bool |      json,nocolumns,indexed,set1 |     13.913 ms |     0.2726 ms |     0.4163 ms |
+|        Media_noColumns_set1_req_int_bool |       table,nocolumns,media,set1 |    269.232 ms |     1.9638 ms |     1.5332 ms |
+|            Indexed_noColumns_set1_op_int |      json,nocolumns,indexed,set1 |      3.700 ms |     0.0735 ms |     0.1910 ms |
+|              Media_noColumns_set1_op_int |       table,nocolumns,media,set1 |     67.871 ms |     0.9793 ms |     0.9160 ms |
+|        Indexed_noColumns_set1_req_string |      json,nocolumns,indexed,set1 |    418.181 ms |     8.0565 ms |     6.7275 ms |
+|          Media_noColumns_set1_req_string |       table,nocolumns,media,set1 |  1,551.383 ms |    25.1084 ms |    23.4864 ms |
+|  Indexed_noColumns_set1_op_string_single |      json,nocolumns,indexed,set1 |  2,503.007 ms |    44.4445 ms |    41.5734 ms |
+|    Media_noColumns_set1_op_string_single |  table,nocolumns,media,set1,miss |    427.422 ms |     3.4945 ms |     2.9181 ms |
+| Indexed_noColumns_set1_req_string_single |      json,nocolumns,indexed,set1 |  1,403.096 ms |    19.6017 ms |    18.3354 ms |
+|   Media_noColumns_set1_req_string_single |  table,nocolumns,media,set1,miss |    853.966 ms |    13.1366 ms |    10.9696 ms |
