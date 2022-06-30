@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-20220630-082147</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                Method</th><th>            Categories</th><th> Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>Json_Req_Three_ShortString</td><td>json,three,req,shortstring</td><td>1,280.30 ms</td><td>14.273 ms</td><td>12.653 ms</td>
+</tr><tr><td>Media_Req_Four_ShortString</td><td>media,four,req,shortstring</td><td>3,189.39 ms</td><td>15.443 ms</td><td>13.690 ms</td>
+</tr><tr><td>Json_Req_Four_ShortString</td><td>json,four,req,shortstring</td><td>1,308.16 ms</td><td>25.161 ms</td><td>22.304 ms</td>
+</tr><tr><td>Media_Req_Five_ShortString</td><td>media,five,req,shortstring</td><td>4,040.11 ms</td><td>66.571 ms</td><td>99.640 ms</td>
+</tr><tr><td>Json_Req_Five_ShortString</td><td>json,five,req,shortstring</td><td>1,280.73 ms</td><td>16.058 ms</td><td>15.021 ms</td>
+</tr><tr><td>Media_Req_Six_ShortString</td><td>media,six,req,shortstring</td><td>4,728.36 ms</td><td>23.233 ms</td><td>20.595 ms</td>
+</tr><tr><td>Json_Req_Six_ShortString</td><td>json,six,req,shortstring</td><td>1,283.91 ms</td><td>15.817 ms</td><td>14.795 ms</td>
+</tr><tr><td>Media_Req_Seven_ShortString</td><td>media,seven,req,shortstring</td><td>5,449.51 ms</td><td>9.016 ms</td><td>7.992 ms</td>
+</tr><tr><td>Json_Req_Seven_ShortString</td><td>json,seven,req,shortstring</td><td>1,288.51 ms</td><td>19.108 ms</td><td>17.874 ms</td>
+</tr><tr><td>Media_Req_Eight_ShortString</td><td>media,eight,req,shortstring</td><td>5,960.90 ms</td><td>34.140 ms</td><td>30.264 ms</td>
+</tr><tr><td>Json_Req_Eight_ShortString</td><td>json,eight,req,shortstring</td><td>1,287.21 ms</td><td>18.112 ms</td><td>16.942 ms</td>
+</tr><tr><td>Media_Op_One_ShortString</td><td>media,one,op,shortstring</td><td>397.69 ms</td><td>2.288 ms</td><td>1.911 ms</td>
+</tr><tr><td>Json_Op_One_ShortString</td><td>json,one,op,shortstring</td><td>170.46 ms</td><td>0.704 ms</td><td>0.550 ms</td>
+</tr><tr><td>Media_Op_Two_ShortString</td><td>media,two,op,shortstring</td><td>796.30 ms</td><td>14.451 ms</td><td>13.517 ms</td>
+</tr><tr><td>Json_Op_Two_ShortString</td><td>json,two,op,shortstring</td><td>4,106.29 ms</td><td>25.568 ms</td><td>23.916 ms</td>
+</tr><tr><td>Media_Op_Three_ShortString</td><td>media,three,op,shortstring</td><td>1,197.46 ms</td><td>12.685 ms</td><td>11.865 ms</td>
+</tr><tr><td>Json_Op_Three_ShortString</td><td>json,three,op,shortstring</td><td>4,759.08 ms</td><td>29.472 ms</td><td>26.126 ms</td>
+</tr><tr><td>Media_Op_Four_ShortString</td><td>media,four,op,shortstring</td><td>1,576.58 ms</td><td>20.381 ms</td><td>18.067 ms</td>
+</tr><tr><td>Json_Op_Four_ShortString</td><td>json,four,op,shortstring</td><td>4,758.49 ms</td><td>24.450 ms</td><td>21.674 ms</td>
+</tr><tr><td>Media_Op_Five_ShortString</td><td>media,five,op,shortstring</td><td>1,973.91 ms</td><td>19.018 ms</td><td>16.859 ms</td>
+</tr><tr><td>Json_Op_Five_ShortString</td><td>json,five,op,shortstring</td><td>4,782.00 ms</td><td>12.091 ms</td><td>10.719 ms</td>
+</tr><tr><td>Media_Op_Six_ShortString</td><td>media,six,op,shortstring</td><td>2,356.98 ms</td><td>34.185 ms</td><td>31.976 ms</td>
+</tr><tr><td>Json_Op_Six_ShortString</td><td>json,six,op,shortstring</td><td>4,783.61 ms</td><td>19.404 ms</td><td>17.201 ms</td>
+</tr><tr><td>Media_Op_Seven_ShortString</td><td>media,seven,op,shortstring</td><td>2,739.50 ms</td><td>27.625 ms</td><td>25.840 ms</td>
+</tr><tr><td>Json_Op_Seven_ShortString</td><td>json,seven,op,shortstring</td><td>4,770.88 ms</td><td>31.735 ms</td><td>26.500 ms</td>
+</tr><tr><td>Media_Op_Eight_ShortString</td><td>media,eight,op,shortstring</td><td>3,140.70 ms</td><td>36.274 ms</td><td>33.930 ms</td>
+</tr><tr><td>Json_Op_Eight_ShortString</td><td>json,eight,op,shortstring</td><td>4,775.82 ms</td><td>36.509 ms</td><td>28.504 ms</td>
+</tr><tr><td>Media_Both_Two_ShortString</td><td>media,two,both,shortstring</td><td>1,197.33 ms</td><td>16.348 ms</td><td>14.492 ms</td>
+</tr><tr><td>Json_Both_Two_ShortString</td><td>json,two,both,shortstring</td><td>874.19 ms</td><td>16.871 ms</td><td>20.083 ms</td>
+</tr><tr><td>Media_Both_Four_ShortString</td><td>media,four,both,shortstring</td><td>2,416.62 ms</td><td>33.188 ms</td><td>31.044 ms</td>
+</tr><tr><td>Json_Both_Four_ShortString</td><td>json,four,both,shortstring</td><td>1,298.13 ms</td><td>23.281 ms</td><td>21.777 ms</td>
+</tr><tr><td>Media_Both_Six_ShortString</td><td>media,six,both,shortstring</td><td>3,599.08 ms</td><td>30.492 ms</td><td>27.030 ms</td>
+</tr><tr><td>Json_Both_Six_ShortString</td><td>json,six,both,shortstring</td><td>1,291.01 ms</td><td>23.548 ms</td><td>22.027 ms</td>
+</tr><tr><td>Media_Both_Eight_ShortString</td><td>media,eight,both,shortstring</td><td>4,711.53 ms</td><td>14.270 ms</td><td>12.650 ms</td>
+</tr><tr><td>Json_Both_Eight_ShortString</td><td>json,eight,both,shortstring</td><td>1,292.35 ms</td><td>24.618 ms</td><td>24.179 ms</td>
+</tr><tr><td>Media_Req_One_ShortString</td><td>media,one,req,shortstring</td><td>795.91 ms</td><td>11.162 ms</td><td>9.895 ms</td>
+</tr><tr><td>Json_Req_One_ShortString</td><td>json,one,req,shortstring</td><td>25.97 ms</td><td>0.512 ms</td><td>0.937 ms</td>
+</tr><tr><td>Media_Req_Two_ShortString</td><td>media,two,req,shortstring</td><td>1,611.80 ms</td><td>28.309 ms</td><td>26.480 ms</td>
+</tr><tr><td>Json_Req_Two_ShortString</td><td>json,two,req,shortstring</td><td>372.84 ms</td><td>4.945 ms</td><td>4.383 ms</td>
+</tr><tr><td>Media_Req_Three_ShortString</td><td>media,three,req,shortstring</td><td>2,409.65 ms</td><td>33.803 ms</td><td>31.620 ms</td>
+</tr></tbody></table>
+</body>
+</html>

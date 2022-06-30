@@ -1,0 +1,13 @@
+Method,Categories,Mean,Error,StdDev
+Media_NoColumns_first_both_date_int_bool,"media,NoColumns,9fields,both,bool,int,date",404.453 ms,4.1403 ms,3.4573 ms
+Media_NoColumns_set1_req_date,"media,NoColumns,3fields,req,date",352.554 ms,6.6846 ms,5.9258 ms
+Media_NoColumns_set1_op_date,"media,NoColumns,2fields,op,date",118.228 ms,2.2492 ms,2.3097 ms
+Media_NoColumns_set1_both_date,"media,NoColumns,5fields,both,date",464.646 ms,5.6165 ms,4.6900 ms
+Indexed_NoColumns_first_both_date_int_bool,"Indexed,NoColumns,9fields,both,bool,int,date",14.679 ms,0.2885 ms,0.4491 ms
+Indexed_NoColumns_set1_req_date,"Indexed,NoColumns,3fields,req,date",13.153 ms,0.2595 ms,0.4264 ms
+Indexed_NoColumns_set1_op_date,"Indexed,NoColumns,2fields,op,date",37.716 ms,0.7233 ms,0.9147 ms
+Indexed_NoColumns_set1_both_date,"Indexed,NoColumns,5fields,both,date",157.691 ms,2.4201 ms,2.5894 ms
+Indexed_AllColumns_first_both_date_int_bool,"Indexed,AllColumns,9fields,both,bool,int,date",15.903 ms,0.3170 ms,0.5635 ms
+Indexed_AllColumns_set1_req_date,"Indexed,AllColumns,3fields,req,date",23.174 ms,0.3524 ms,0.3297 ms
+Indexed_AllColumns_set1_op_date,"Indexed,AllColumns,2fields,op,date",44.041 ms,0.7307 ms,0.6835 ms
+Indexed_AllColumns_set1_both_date,"Indexed,AllColumns,5fields,both,date",161.734 ms,2.9968 ms,2.8032 ms

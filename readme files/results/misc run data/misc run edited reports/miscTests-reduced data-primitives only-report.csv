@@ -1,0 +1,10 @@
+Method,Categories,Mean,Error,StdDev
+Media_NoColumns_first_both_bool_int,"media,NoColumns,6fields,both,bool,int",137.736 ms,1.7443 ms,1.5463 ms
+Media_NoColumns_first_req_bool_int,"media,NoColumns,7fields,req,bool,int",226.766 ms,2.4157 ms,2.1415 ms
+Media_NoColumns_first_op_int,"media,NoColumns,4fields,op,int",90.938 ms,1.4189 ms,1.2578 ms
+Indexed_NoColumns_first_both_bool_int,"Indexed,NoColumns,6fields,both,bool,int",4.225 ms,0.0903 ms,0.2621 ms
+Indexed_NoColumns_first_req_bool_int,"Indexed,NoColumns,7fields,req,bool,int",7.471 ms,0.1444 ms,0.2333 ms
+Indexed_NoColumns_first_op_int,"Indexed,NoColumns,4fields,op,int",3.967 ms,0.0771 ms,0.2174 ms
+Indexed_AllColumns_first_both_bool_int,"Indexed,AllColumns,6fields,both,bool,int",4.690 ms,0.0932 ms,0.2105 ms
+Indexed_AllColumns_first_req_bool_int,"Indexed,AllColumns,7fields,req,bool,int",7.787 ms,0.1552 ms,0.3099 ms
+Indexed_AllColumns_first_op_int,"Indexed,AllColumns,4fields,op,int",4.490 ms,0.0890 ms,0.1972 ms
