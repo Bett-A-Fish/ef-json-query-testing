@@ -8,6 +8,8 @@
   - [Test Data](#test-data)
     - [CreateBogusData.cs](#createbogusdatacs)
   - [Search Patterns](#search-patterns)
+    - [Json Patterns](#json-patterns)
+    - [Dynamic Patterns](#dynamic-patterns)
   - [Running](#running)
     - [Additional notes](#additional-notes)
   - [Results](#results)
@@ -50,18 +52,34 @@ Some extra private "large" versions of methods are included that I used to gener
 
 Multiple search pattern types were created to see what varients were most efficient. The intent is to see how each handles different search patterns, however all of the below are currently only setup to handle a basic `AND` search rather than the full query builder outlined above. For each pattern, unit tests were added to allow easily checking their validity along with how they each handle bad user input using [NaughtyStrings](https://github.com/SimonCropp/NaughtyStrings). As benchmarking has progressed, more varients have been added and older ones deemed consistently worse than similar counterparts were moved out of the way into `SearchServiceOld.cs`.
 
-- Json - using Raw sql.
-  - Creates a sql query to have EF run.
+### Json Patterns
+
+- `JsonSearch_Indexed_NoColumns`
+  - Not a big change from `JsonSearch_Indexed` but a business decision changed the information needed to be brought back from the server.
+- `JsonSearch_Indexed_NoColumns_StringAdjustment`
+  - An attempt to see if searching on optional strin fields could be sped up
+- `JsonSearch_Indexed`
+  - Similar to `JsonSearch_Raw` but with columns being indexed
+  - Note: the testing is setup to make an index for each field but the intention for a production environment would be to only add indexing to the needed fields.
+- `JsonSearch_Raw`
+  - Dynamically generated sql ran with ef
   - Uses parametrized values to avoid sql injection.
-- Json - using EF magic
+- `JsonSearch_EfMagic`
   - Through custom EF functions, a query is generated.
-- Json - with indexs
-  - Creates a sql query to have EF run that will properly utilize indexing
-    - Note: the testing is setup to make an index for each field but the intention for a production environment would be to only add indexing to the needed fields.
-- Dynamic table - through `DynamicMediaInformation`
-  - Uses EF to search through `DynamicMediaInformation` table to find `Media_Dynamic` rows that fit the given criteria.
-- Dynamic table - through `Media_Dynamic`
-  - Uses EF to search through `Media_Dynamic`'s connected `DynamicMediaInformation` rows to find media items that match given criteria.
+
+### Dynamic Patterns
+
+- `TableSearch_Media_NoColumns`
+  - Similar to `TableSearch_Media` but a lot faster with much less data to be returned.
+  - note: business decision changed the information needed to be brought back from the server.
+- `TableSearch_Media`
+  - Uses EF to search the database. Uses `Includes` to get the field information back from the server.
+- `TableSearch_Media_RestrictedColumns`
+  - Similar to `TableSearch_Media` but with the option to restrict how many columns are returned.
+- `TableSearch_Media_SplitQuery`
+  - Similar to `TableSearch_Media` but with the use of EF's `SplitQuery` function instead of `Includes`
+- `TableSearch_Media_TwoQueries`
+  - Similar to `TableSearch_Media` but intentionally splits the query into two queries. One to get the list of matching id's and the second to get the column information.
 
 ## Running
 
@@ -122,6 +140,7 @@ The boxplots are generated using the included `BuildPlots_alt.R` file.
 
 Box plot for searches getting only the first datarow.
 ![First datarow boxplot](readme%20files/results/first/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-first-boxplot.png)
+
 ``` ini
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
@@ -130,8 +149,8 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
   [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
   DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
 
-
 ```
+
 |                          Method |                  Categories |         Mean |      Error |     StdDev |
 |-------------------------------- |---------------------------- |-------------:|-----------:|-----------:|
 |     Indexed_first_both_bool_int | json,lessrand,indexed,first |     7.008 ms |  0.1370 ms |  0.3773 ms |
@@ -151,8 +170,9 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 
 ---
 
-Box plot for searches getting only the last datarow. 
+Box plot for searches getting only the last datarow.
 ![Last datarow boxplot](readme%20files/results/last/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-last-boxplot.png)
+
 ``` ini
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
@@ -161,8 +181,8 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
   [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
   DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
 
-
 ```
+
 |                         Method |                 Categories |         Mean |      Error |     StdDev |
 |------------------------------- |--------------------------- |-------------:|-----------:|-----------:|
 |     Indexed_Last_both_int_bool | json,lessrand,indexed,last |     4.833 ms |  0.0956 ms |  0.1624 ms |
@@ -178,6 +198,7 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 
 Box plot for searches get a set of values.
 ![Set1 boxplot](readme%20files/results/set1/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-set1-boxplot.png)
+
 ``` ini
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
@@ -186,8 +207,8 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
   [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
   DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
 
-
 ```
+
 |                         Method |                     Categories |         Mean |      Error |     StdDev |
 |------------------------------- |------------------------------- |-------------:|-----------:|-----------:|
 |     Indexed_set1_both_int_bool |     json,lessrand,indexed,set1 |    12.407 ms |  0.2388 ms |  0.3348 ms |
@@ -207,6 +228,7 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 
 Box plot for searches get a set of values.
 ![Set2 boxplot](readme%20files/results/set2/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-set2-boxplot.png)
+
 ``` ini
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
@@ -215,8 +237,8 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
   [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
   DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
 
-
 ```
+
 |                         Method |                 Categories |         Mean |      Error |     StdDev |
 |------------------------------- |--------------------------- |-------------:|-----------:|-----------:|
 |     Indexed_set2_both_int_bool | json,lessrand,indexed,set2 |     7.835 ms |  0.1562 ms |  0.3620 ms |
