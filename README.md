@@ -15,9 +15,12 @@
   - [Available Benchmarks](#available-benchmarks)
     - [Single search](#single-search)
     - [Multi search](#multi-search)
+    - [Categories](#categories)
   - [Results](#results)
-    - [LessRandomBenchmarks.cs](#lessrandombenchmarkscs)
-    - [other](#other)
+    - [No Columns](#no-columns)
+    - [Date Field](#date-field)
+    - [Misc](#misc)
+    - [String](#string)
 
 ## Data Model
 
@@ -137,158 +140,49 @@ Single search was mainly used for the original setup of benchmark dotnet and get
 
 This section has te hard coded and random sections. Originally random values were used for testing but realized the consistency of choosing what would be returned was also valuable information to these tests. So added the hard coded section of tests. The random tests can be used with any database. The hard coded ones can be used with the provided bacpac file: `ef_testing_index_large.bacpac`. Except for `StringBenchmarks.cs` which needs the other bacpac to work: `ef_testing_string_large.bacpac`.
 
+- Less Random
+  - Tests the normal search patterns with specific data to see if the location of the data in the database might have changed search times.
+  - Categories: `table`, `json`, `first`, `last`, `set1`, `set2`
 - Column Count
-  - Tests the `RestrictedColumns` search pattern
+  - Tests the `RestrictedColumns` search pattern to see if less data returned would improve dynamic search speed. (less columns actually increased search times)
   - Categories: `table`, `columncount`, `first`, `set1`, `set2`, `count10`, `count25`, `countall`
+- Split Query
+  - Tests the normal json against the "normal", `SplitQuery`, and `TwoQueries` versions of the dynamic search patterns. (`SplitQuery` was consistently worse than everything, `TwoQueries` was better, but json still out performed)
+  - Categories: `table`, `json`, `indexed`, `media`, `media2`, `mediasplit`, `first`, `last`, `set1`, `set2`
+- No Columns
+  - Tests normal and `NoColumns` versions of the search patterns. (Vast improvement to dynamic search times, json didnt change)
+  - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `last`, `set1`, `set2`
 - Date Field
   - Tests the normal and `NoColumns` versions of the search patterns against date fields
   - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `set1`, `set2`, `set3`
-- Less Random
-  - Tests the normal search patterns
-  - Categories: `table`, `json`, `first`, `last`, `set1`, `set2`
 - Misc
   - Tests the normal and `NoColumns` versions of the search patterns against some of the datasets that had larger differences in search times
   - Categories: `indexed`, `media`, `AllColumns`, `NoColumns`, `#fields` (1,2,3,4,5,6,7,9), `both`, `req`, `op`, `date`, `int`, `bool`, `string`
-- No Columns
-  - Tests normal and `NoColumns` versions of the search patterns
-  - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `last`, `set1`, `set2`
-- Split Query
-  - Tests the normal json against the normal, `SplitQuery`, and `TwoQueries` verions of the dynamic search patterns
-  - Categories: `table`, `json`, `indexed`, `media`, `media2`, `mediasplit`, `first`, `last`, `set1`, `set2`
 - String
   - Tests only `NoColumn` search patterns against different sets of string search values
   - Categories: `media`, `json`, `req`, `op`, `both`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `buildupon`, `shortstring`, `longstring`, `charcount`, `ten`, `twelve`, `fourteen`, `sixteen`, `withint`
 
-## Results
-
-### LessRandomBenchmarks.cs
-
-The below results utilize the included bacpac file and use the `LessRandomBenchmarks.cs` benchmarks. Which is a set of hardcoded test data with the aim of getting specific sets of data. It uses only two of the listed search patterns that turned out to be the fastest overall for their individual groups. `JsonSearch_Indexed` for the json table structure and `TableSearch_Media` for the dynamic table structure. With a set of categories of `first`, `last`, `set1`, and `set2`.
+### Categories
 
 - `first` - given search values to find the first item in the table
 - `last` - given search values to find the last item in the table
 - `set` - values that will return more than one datarow for a search
-
-And in the name of the benchmark tests the below were used to distinguish what was used in a search.
-
 - `req` - only searches on columns that are required to be in each row
 - `op` - only searches on columns that are optional for each row
-- `both` - searches on both types of columns
-- (`int`, `bool`, `string`) - the types of search values used
-- `single` - only one column was searched on. If not included, at least two columns were used.
+- `both` - search includes optional and required fields
+- (`int`, `bool`, `string`, `date`) - the types of search values used
+- `#fields` (1,2,3,4,5,6,7,9) - the number of fields searched on
 
-The boxplots are generated using the included `BuildPlots_alt.R` file.
+## Results
 
-Box plot for searches getting only the first datarow.
-![First datarow boxplot](readme%20files/results/first/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-first-boxplot.png)
+A lot of the benchmarks included in this project were done before the business decision of not returning the media information. Which vastly improved the speed of the dynamic table search patterns. The test results of these has still been included but will not be reviewed here. These sections include: `Column Count`, `Less Random`, and `Split Query`. While the dynamic search patterns improved with the removal of the column data, the json patterns didn't see much difference, but for the sake of consistency I will focus on the `No Column` version of the json search patterns. However a lot of the test results still include the original version of json and dynamic search so they can be easily compared with the `No Column` versions.
 
-``` ini
+The plots are generated using the included `BuildPlots_alt.R` file.
 
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
-AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=6.0.300
-  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+### No Columns
 
-```
+### Date Field
 
-|                          Method |                  Categories |         Mean |      Error |     StdDev |
-|-------------------------------- |---------------------------- |-------------:|-----------:|-----------:|
-|     Indexed_first_both_bool_int | json,lessrand,indexed,first |     7.008 ms |  0.1370 ms |  0.3773 ms |
-|       Media_first_both_bool_int |  table,lessrand,media,first |   138.727 ms |  2.2613 ms |  1.7655 ms |
-|      Indexed_first_req_bool_int | json,lessrand,indexed,first |    27.680 ms |  0.4322 ms |  0.4625 ms |
-|        Media_first_req_bool_int |  table,lessrand,media,first |   267.641 ms |  3.9830 ms |  3.3260 ms |
-|            Indexed_first_op_int | json,lessrand,indexed,first |     5.210 ms |  0.1038 ms |  0.2097 ms |
-|              Media_first_op_int |  table,lessrand,media,first |    90.174 ms |  1.2907 ms |  1.0778 ms |
-|        Indexed_first_req_string | json,lessrand,indexed,first | 1,470.281 ms | 22.9791 ms | 21.4946 ms |
-|          Media_first_req_string |  table,lessrand,media,first | 3,155.082 ms | 26.4490 ms | 22.0861 ms |
-|         Indexed_first_op_string | json,lessrand,indexed,first | 2,498.910 ms | 20.6448 ms | 18.3011 ms |
-|           Media_first_op_string |  table,lessrand,media,first |   492.755 ms |  7.3617 ms |  6.8861 ms |
-|  Indexed_first_op_string_single | json,lessrand,indexed,first | 2,478.082 ms | 14.1720 ms | 13.2565 ms |
-|    Media_first_op_string_single |  table,lessrand,media,first |   402.723 ms |  1.2851 ms |  1.0033 ms |
-| Indexed_first_req_string_single | json,lessrand,indexed,first | 1,387.691 ms | 13.4742 ms | 11.9446 ms |
-|   Media_first_req_string_single |  table,lessrand,media,first |   824.639 ms |  6.2622 ms |  5.2292 ms |
+### Misc
 
----
-
-Box plot for searches getting only the last datarow.
-![Last datarow boxplot](readme%20files/results/last/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-last-boxplot.png)
-
-``` ini
-
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
-AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=6.0.300
-  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-
-```
-
-|                         Method |                 Categories |         Mean |      Error |     StdDev |
-|------------------------------- |--------------------------- |-------------:|-----------:|-----------:|
-|     Indexed_Last_both_int_bool | json,lessrand,indexed,last |     4.833 ms |  0.0956 ms |  0.1624 ms |
-|       Media_last_both_int_bool |  table,lessrand,media,last |   153.960 ms |  1.8422 ms |  1.7232 ms |
-|      Indexed_Last_req_int_bool | json,lessrand,indexed,last |     8.191 ms |  0.1634 ms |  0.3622 ms |
-|        Media_last_req_int_bool |  table,lessrand,media,last |   174.140 ms |  2.8460 ms |  2.3765 ms |
-|        Indexed_Last_req_string | json,lessrand,indexed,last | 1,454.150 ms | 13.6095 ms | 12.7303 ms |
-|          Media_last_req_string |  table,lessrand,media,last | 3,151.460 ms | 54.4148 ms | 50.8997 ms |
-| Indexed_Last_req_string_single | json,lessrand,indexed,last | 1,365.279 ms | 13.8439 ms | 12.2722 ms |
-|   Media_last_req_string_single |  table,lessrand,media,last |   830.242 ms |  6.4290 ms |  5.3685 ms |
-
----
-
-Box plot for searches get a set of values.
-![Set1 boxplot](readme%20files/results/set1/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-set1-boxplot.png)
-
-``` ini
-
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
-AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=6.0.300
-  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-
-```
-
-|                         Method |                     Categories |         Mean |      Error |     StdDev |
-|------------------------------- |------------------------------- |-------------:|-----------:|-----------:|
-|     Indexed_set1_both_int_bool |     json,lessrand,indexed,set1 |    12.407 ms |  0.2388 ms |  0.3348 ms |
-|       Media_set1_both_int_bool |      table,lessrand,media,set1 |   137.246 ms |  1.3075 ms |  1.2230 ms |
-|      Indexed_set1_req_int_bool |     json,lessrand,indexed,set1 |    17.118 ms |  0.3411 ms |  0.8106 ms |
-|        Media_set1_req_int_bool |      table,lessrand,media,set1 |   272.267 ms |  1.5866 ms |  1.4065 ms |
-|            Indexed_set1_op_int |     json,lessrand,indexed,set1 |     7.484 ms |  0.1443 ms |  0.1604 ms |
-|              Media_set1_op_int |      table,lessrand,media,set1 |    68.615 ms |  1.3577 ms |  2.1924 ms |
-|        Indexed_set1_req_string |     json,lessrand,indexed,set1 |   414.619 ms |  2.1831 ms |  1.7044 ms |
-|          Media_set1_req_string |      table,lessrand,media,set1 | 1,550.519 ms | 30.6661 ms | 30.1182 ms |
-|  Indexed_set1_op_string_single |     json,lessrand,indexed,set1 | 2,527.856 ms | 45.7465 ms | 42.7913 ms |
-|    Media_set1_op_string_single | table,lessrand,media,set1,miss |   424.815 ms |  0.9755 ms |  0.7616 ms |
-| Indexed_set1_req_string_single |     json,lessrand,indexed,set1 | 1,406.252 ms | 24.1559 ms | 22.5955 ms |
-|   Media_set1_req_string_single | table,lessrand,media,set1,miss |   851.747 ms |  7.7749 ms |  6.4924 ms |
-
----
-
-Box plot for searches get a set of values.
-![Set2 boxplot](readme%20files/results/set2/ef_json_query_testing.Benchmarks.LessRandomBenchmarks-set2-boxplot.png)
-
-``` ini
-
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
-AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=6.0.300
-  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
-
-```
-
-|                         Method |                 Categories |         Mean |      Error |     StdDev |
-|------------------------------- |--------------------------- |-------------:|-----------:|-----------:|
-|     Indexed_set2_both_int_bool | json,lessrand,indexed,set2 |     7.835 ms |  0.1562 ms |  0.3620 ms |
-|       Media_set2_both_int_bool |  table,lessrand,media,set2 |   223.547 ms |  1.5846 ms |  1.5563 ms |
-|           Indexed_set2_req_int | json,lessrand,indexed,set2 |     7.865 ms |  0.1430 ms |  0.1117 ms |
-|             Media_set2_req_int |  table,lessrand,media,set2 |   174.690 ms |  2.6236 ms |  2.9162 ms |
-|        Indexed_set2_req_string | json,lessrand,indexed,set2 |   410.363 ms |  5.4823 ms |  4.5780 ms |
-|          Media_set2_req_string |  table,lessrand,media,set2 | 1,550.718 ms | 25.9598 ms | 24.2828 ms |
-| Indexed_set2_req_string_single | json,lessrand,indexed,set2 | 1,370.598 ms | 22.5360 ms | 21.0802 ms |
-|   Media_set2_req_string_single |  table,lessrand,media,set2 |   831.704 ms | 12.5529 ms | 11.7420 ms |
-
-### other
+### String
