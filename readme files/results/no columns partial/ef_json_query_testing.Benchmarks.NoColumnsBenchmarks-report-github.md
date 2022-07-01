@@ -1,0 +1,30 @@
+``` ini
+
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+
+
+```
+|                                    Method |            Categories |       Mean |    Error |   StdDev |
+|------------------------------------------ |---------------------- |-----------:|---------:|---------:|
+|         Indexed_noColumns_first_op_string |  json,nocolumns,first | 2,542.8 ms | 11.38 ms | 10.09 ms |
+|  Indexed_noColumns_first_op_string_single |  json,nocolumns,first | 2,538.7 ms | 14.86 ms | 13.90 ms |
+|        Indexed_noColumns_first_req_string |  json,nocolumns,first | 1,545.1 ms |  6.48 ms |  6.07 ms |
+| Indexed_noColumns_first_req_string_single |  json,nocolumns,first | 1,491.6 ms |  4.28 ms |  3.57 ms |
+|         Indexed_noColumns_set1_req_string |   json,nocolumns,set1 |   442.0 ms |  3.31 ms |  2.76 ms |
+|   Indexed_noColumns_set1_op_string_single |   json,nocolumns,set1 | 2,529.4 ms | 10.38 ms |  8.67 ms |
+|  Indexed_noColumns_set1_req_string_single |   json,nocolumns,set1 | 1,493.4 ms |  3.12 ms |  2.60 ms |
+|         Indexed_noColumns_set2_req_string |   json,nocolumns,set2 |   436.9 ms |  1.95 ms |  1.63 ms |
+|  Indexed_noColumns_set2_req_string_single |   json,nocolumns,set2 | 1,468.1 ms |  7.42 ms |  6.94 ms |
+|           Media_noColumns_first_op_string | table,nocolumns,first |   486.9 ms |  2.23 ms |  1.86 ms |
+|    Media_noColumns_first_op_string_single | table,nocolumns,first |   406.6 ms |  1.15 ms |  0.90 ms |
+|          Media_noColumns_first_req_string | table,nocolumns,first | 3,093.4 ms | 11.52 ms | 10.21 ms |
+|   Media_noColumns_first_req_string_single | table,nocolumns,first |   829.5 ms |  3.53 ms |  2.95 ms |
+|           Media_noColumns_set1_req_string |  table,nocolumns,set1 | 1,537.0 ms |  6.33 ms |  5.29 ms |
+|     Media_noColumns_set1_op_string_single |  table,nocolumns,set1 |   428.5 ms |  1.50 ms |  1.33 ms |
+|    Media_noColumns_set1_req_string_single |  table,nocolumns,set1 |   857.3 ms |  2.99 ms |  2.65 ms |
+|           Media_noColumns_set2_req_string |  table,nocolumns,set2 | 1,541.5 ms |  7.30 ms |  6.83 ms |
+|    Media_noColumns_set2_req_string_single |  table,nocolumns,set2 |   828.2 ms |  4.04 ms |  3.58 ms |
