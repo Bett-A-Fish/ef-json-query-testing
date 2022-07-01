@@ -12,8 +12,12 @@
     - [Dynamic Patterns](#dynamic-patterns)
   - [Running](#running)
     - [Additional notes](#additional-notes)
+  - [Available Benchmarks](#available-benchmarks)
+    - [Single search](#single-search)
+    - [Multi search](#multi-search)
   - [Results](#results)
-    - [Overview](#overview)
+    - [LessRandomBenchmarks.cs](#lessrandombenchmarkscs)
+    - [other](#other)
 
 ## Data Model
 
@@ -118,9 +122,46 @@ In `BaseBenchmark.cs` file, changing `EfTestDbContext.Create(false)` to `true` w
 
 Unit tests are included to make sure each search works as expected and can handle bad user data.
 
+## Available Benchmarks
+
+- Single search
+- Multi search
+  - Hard coded value tests
+  - Random value tests
+
+### Single search
+
+Single search was mainly used for the original setup of benchmark dotnet and getting a basis started for search patterns. All of these were quickly dropped for multi search versions if possible. Though these arent used anymore, they are still available.
+
+### Multi search
+
+This section has te hard coded and random sections. Originally random values were used for testing but realized the consistency of choosing what would be returned was also valuable information to these tests. So added the hard coded section of tests. The random tests can be used with any database. The hard coded ones can be used with the provided bacpac file: `ef_testing_index_large.bacpac`. Except for `StringBenchmarks.cs` which needs the other bacpac to work: `ef_testing_string_large.bacpac`.
+
+- Column Count
+  - Tests the `RestrictedColumns` search pattern
+  - Categories: `table`, `columncount`, `first`, `set1`, `set2`, `count10`, `count25`, `countall`
+- Date Field
+  - Tests the normal and `NoColumns` versions of the search patterns against date fields
+  - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `set1`, `set2`, `set3`
+- Less Random
+  - Tests the normal search patterns
+  - Categories: `table`, `json`, `first`, `last`, `set1`, `set2`
+- Misc
+  - Tests the normal and `NoColumns` versions of the search patterns against some of the datasets that had larger differences in search times
+  - Categories: `indexed`, `media`, `AllColumns`, `NoColumns`, `#fields` (1,2,3,4,5,6,7,9), `both`, `req`, `op`, `date`, `int`, `bool`, `string`
+- No Columns
+  - Tests normal and `NoColumns` versions of the search patterns
+  - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `last`, `set1`, `set2`
+- Split Query
+  - Tests the normal json against the normal, `SplitQuery`, and `TwoQueries` verions of the dynamic search patterns
+  - Categories: `table`, `json`, `indexed`, `media`, `media2`, `mediasplit`, `first`, `last`, `set1`, `set2`
+- String
+  - Tests only `NoColumn` search patterns against different sets of string search values
+  - Categories: `media`, `json`, `req`, `op`, `both`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `buildupon`, `shortstring`, `longstring`, `charcount`, `ten`, `twelve`, `fourteen`, `sixteen`, `withint`
+
 ## Results
 
-### Overview
+### LessRandomBenchmarks.cs
 
 The below results utilize the included bacpac file and use the `LessRandomBenchmarks.cs` benchmarks. Which is a set of hardcoded test data with the aim of getting specific sets of data. It uses only two of the listed search patterns that turned out to be the fastest overall for their individual groups. `JsonSearch_Indexed` for the json table structure and `TableSearch_Media` for the dynamic table structure. With a set of categories of `first`, `last`, `set1`, and `set2`.
 
@@ -249,3 +290,5 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 |          Media_set2_req_string |  table,lessrand,media,set2 | 1,550.718 ms | 25.9598 ms | 24.2828 ms |
 | Indexed_set2_req_string_single | json,lessrand,indexed,set2 | 1,370.598 ms | 22.5360 ms | 21.0802 ms |
 |   Media_set2_req_string_single |  table,lessrand,media,set2 |   831.704 ms | 12.5529 ms | 11.7420 ms |
+
+### other
