@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.ColumnCountBenchmarks-20220620-143934</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                          Method</th><th>                Categories</th><th> Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>Media_count10_first_op_string</td><td>table,columncount,first,count10</td><td>644.32 ms</td><td>12.667 ms</td><td>21.509 ms</td>
+</tr><tr><td>Media_count10_first_op_string_single</td><td>table,columncount,first,count10</td><td>545.75 ms</td><td>7.265 ms</td><td>6.067 ms</td>
+</tr><tr><td>Media_count10_first_req_string</td><td>table,columncount,first,count10</td><td>3,325.79 ms</td><td>42.093 ms</td><td>37.314 ms</td>
+</tr><tr><td>Media_count10_first_req_string_single</td><td>table,columncount,first,count10</td><td>148.90 ms</td><td>2.969 ms</td><td>8.472 ms</td>
+</tr><tr><td>Media_count25_first_op_string</td><td>table,columncount,first,count25</td><td>486.89 ms</td><td>2.632 ms</td><td>2.055 ms</td>
+</tr><tr><td>Media_count25_first_op_string_single</td><td>table,columncount,first,count25</td><td>79.77 ms</td><td>1.798 ms</td><td>5.272 ms</td>
+</tr><tr><td>Media_count25_first_req_string</td><td>table,columncount,first,count25</td><td>3,162.48 ms</td><td>33.700 ms</td><td>31.523 ms</td>
+</tr><tr><td>Media_count25_first_req_string_single</td><td>table,columncount,first,count25</td><td>145.52 ms</td><td>2.897 ms</td><td>5.983 ms</td>
+</tr><tr><td>Media_countAll_first_op_string</td><td>table,columncount,first,countall</td><td>498.29 ms</td><td>8.871 ms</td><td>7.864 ms</td>
+</tr><tr><td>Media_countAll_first_op_string_single</td><td>table,columncount,first,countall</td><td>77.48 ms</td><td>1.943 ms</td><td>5.728 ms</td>
+</tr><tr><td>Media_countAll_first_req_string</td><td>table,columncount,first,countall</td><td>3,159.02 ms</td><td>18.331 ms</td><td>16.250 ms</td>
+</tr><tr><td>Media_countAll_first_req_string_single</td><td>table,columncount,first,countall</td><td>140.97 ms</td><td>2.812 ms</td><td>5.992 ms</td>
+</tr></tbody></table>
+</body>
+</html>
