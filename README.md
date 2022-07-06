@@ -207,7 +207,7 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 
 <details>
   <summary>Tbl 1: No Columns Benchmarks - dynamic</summary>
-  
+
 |                                    Method |          Mean |         Error |        StdDev |
 |------------------------------------------ |--------------:|--------------:|--------------:|
 |                  Media_set1_both_int_bool |    145.070 ms |     2.5972 ms |     3.0917 ms |
@@ -276,21 +276,21 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 <details>
   <summary>Fig 1: No Columns Benchmarks - first</summary>
 
-![Fig 1: No Columns Benchmarks - first](readme%20files/results/No%20Columns/no%20columns%20-%20all/first/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+![Fig 1: No Columns Benchmarks - first](readme%20files/results/No%20Columns/no%20columns%20-%20all/first/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot-line.png)
 
 </details>
 
 <details>
   <summary>Fig 2: No Columns Benchmarks - set1</summary>
 
-![Fig 2: No Columns Benchmarks - set1](readme%20files/results/No%20Columns/no%20columns%20-%20all/set1/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+![Fig 2: No Columns Benchmarks - set1](readme%20files/results/No%20Columns/no%20columns%20-%20all/set1/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot-line.png)
 
 </details>
 
 <details>
   <summary>Fig 3: No Columns Benchmarks - strings only</summary>
 
-![Fig 3: No Columns Benchmarks - strings only](readme%20files/results/No%20Columns/no%20columns%20-%20string%20only/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+![Fig 3: No Columns Benchmarks - strings only](readme%20files/results/No%20Columns/no%20columns%20-%20string%20only/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot-line.png)
 
 </details>
 
@@ -385,7 +385,7 @@ The misc benchmarks are a collection of benchmarks I pulled from other places wh
 <details>
   <summary>Fig 4:  Misc Benchmarks</summary>
 
-![Fig 4:  Misc Benchmarks](readme%20files/results/Misc/misc%20run%20reduced%20data/miscTests-media-allcolumns-index-allcolumns-removed-line-boxplot.png)
+![Fig 4:  Misc Benchmarks](readme%20files/results/Misc/misc%20run%20reduced%20data/miscTests-media-allcolumns-index-allcolumns-removed-boxplot-line.png)
 
 </details>
 
