@@ -1,4 +1,4 @@
-﻿# Entity Framework Vs Json Queries
+# Entity Framework Vs Json Queries
 
 ## Contents
 
@@ -408,9 +408,182 @@ These benchmarks use a different database than those above. The file for it has 
 
 #### Normal
 
+This first run was somewhat informative. It showed a basic pattern that the dynamic search over strings takes longer based on how many fields are searched over. While the json search changes based on the types of fields searched. With optional fields taking longer than dynamic and required only fields being much faster than the dynamic version. However this data seemed inconsistent because json had some random spikes in its search times.
+
+`Tbl 6` shows the raw data and Fig 5 the basic plot for this. This format wasn't very informative so I added additional plots (`Fig 6`, `Fig 7`, `Fig 8`) for better comparing of these search patterns.
+
+<details>
+  <summary>Tbl 6: String Benchmarks - Normal</summary>
+
+|           Method |        Mean |     Error |    StdDev |
+|----------------- | -----------:|----------:|----------:|
+|    Media_Req_One |   153.63 ms |  3.046 ms |  4.368 ms |
+|     Json_Req_One |    26.43 ms |  0.521 ms |  0.714 ms |
+|    Media_Req_Two | 1,721.58 ms | 11.659 ms | 10.336 ms |
+|     Json_Req_Two |   493.26 ms |  6.767 ms |  6.330 ms |
+|  Media_Req_Three | 2,572.17 ms | 19.979 ms | 17.711 ms |
+|   Json_Req_Three | 1,966.27 ms | 11.146 ms |  9.880 ms |
+|   Media_Req_Four | 3,409.05 ms | 26.122 ms | 24.435 ms |
+|    Json_Req_Four | 2,383.64 ms |  9.347 ms |  8.743 ms |
+|   Media_Req_Five | 4,234.82 ms | 10.756 ms |  8.982 ms |
+|    Json_Req_Five | 1,402.98 ms |  7.307 ms |  5.705 ms |
+|    Media_Req_Six | 5,221.28 ms | 95.834 ms | 89.643 ms |
+|     Json_Req_Six | 2,594.07 ms | 14.244 ms | 13.324 ms |
+|  Media_Req_Seven | 6,009.03 ms | 16.013 ms | 14.979 ms |
+|   Json_Req_Seven | 2,609.36 ms |  9.405 ms |  8.797 ms |
+|  Media_Req_Eight | 6,827.40 ms | 19.107 ms | 17.872 ms |
+|   Json_Req_Eight | 4,680.04 ms | 10.539 ms |  9.342 ms |
+|     Media_Op_One |    62.31 ms |  1.176 ms |  1.307 ms |
+|      Json_Op_One |    28.05 ms |  0.264 ms |  0.234 ms |
+|     Media_Op_Two |   863.29 ms |  1.770 ms |  1.569 ms |
+|      Json_Op_Two | 2,206.16 ms | 15.537 ms | 12.974 ms |
+|   Media_Op_Three | 1,362.10 ms |  9.611 ms |  8.520 ms |
+|    Json_Op_Three | 5,340.91 ms | 19.233 ms | 17.050 ms |
+|    Media_Op_Four | 1,798.65 ms |  3.925 ms |  3.671 ms |
+|     Json_Op_Four | 5,403.10 ms | 33.622 ms | 31.450 ms |
+|    Media_Op_Five | 2,185.05 ms |  4.914 ms |  4.597 ms |
+|     Json_Op_Five | 5,371.52 ms | 21.022 ms | 18.635 ms |
+|     Media_Op_Six | 2,669.32 ms | 18.444 ms | 17.253 ms |
+|      Json_Op_Six | 5,461.66 ms | 10.487 ms |  9.810 ms |
+|   Media_Op_Seven | 2,793.89 ms |  5.922 ms |  4.624 ms |
+|    Json_Op_Seven | 6,735.02 ms | 16.532 ms | 15.464 ms |
+|   Media_Op_Eight | 3,486.25 ms | 13.419 ms | 11.896 ms |
+|    Json_Op_Eight | 5,306.52 ms | 18.558 ms | 17.359 ms |
+|   Media_Both_Two | 1,338.78 ms |  9.500 ms |  8.887 ms |
+|    Json_Both_Two | 2,536.93 ms | 10.512 ms |  9.833 ms |
+|  Media_Both_Four | 2,693.03 ms | 10.054 ms |  9.404 ms |
+|   Json_Both_Four | 5,431.76 ms | 14.023 ms | 13.117 ms |
+|   Media_Both_Six | 3,682.96 ms | 12.264 ms | 11.471 ms |
+|    Json_Both_Six | 3,665.26 ms |  8.397 ms |  7.444 ms |
+| Media_Both_Eight | 5,169.48 ms | 21.261 ms | 18.848 ms |
+|  Json_Both_Eight | 5,442.79 ms | 13.986 ms | 13.083 ms |
+
+</details>
+
+<details>
+  <summary>Fig 5: String Benchmarks - Normal - Box Plot</summary>
+
+![Fig 5: String Benchmarks - Normal - Box Plot](readme%20files/results/String/string%20fields%20-%20normal/ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-boxplot-lines.png)
+
+</details>
+
+<details>
+  <summary>Fig 6: String Benchmarks - Normal - Line Plot - Required Only</summary>
+
+![Fig 6: String Benchmarks - Normal - Line Plot - Required Only](readme%20files/results/String/string%20fields%20-%20normal/String%20Search%20Query%20-%20json%20vs%20media%20with%20required%20fields.png)
+
+</details>
+
+<details>
+  <summary>Fig 7: String Benchmarks - Normal - Line Plot - Optional Only</summary>
+
+![Fig 7: String Benchmarks - Normal - Line Plot - Optional Only](readme%20files/results/String/string%20fields%20-%20normal/String%20Search%20Query%20-%20json%20vs%20media%20with%20optional%20fields.png)
+
+</details>
+
+<details>
+  <summary>Fig 8: String Benchmarks - Normal - Line Plot - Both</summary>
+
+![Fig 8: String Benchmarks - Normal - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20normal/String%20Search%20Query%20-%20json%20vs%20media%20with%20both%20fields.png)
+
+</details>
+
 ---
 
 #### Build Upon
+
+Similar to the last benchmark, this one was made to get more consistent data. Each test builds on the previous set of fields so that all of the search fields are the same except for the newest one added. Example:
+
+```C#
+
+{ 1 , "possimus" }
+
+{ 1 , "possimus" },
+{ 2 , "tempore" }
+
+{ 1 , "possimus" },
+{ 2 , "tempore" },
+{ 3 , "numquam" }
+
+```
+
+This style looks to have worked. As there is no longer any unexpected changes in the data. The plots `Fig 10`, `Fig 11`, and `Fig 12` show the new and previous tests for comparison. While the dynamic(media) search shows a consistent increase for every field added, json displays a consistent speed for any fields added after the third, seen in `Fig 10`. Which vastly increases how fast it does a search compared to dynamic when all fields are required. However, while json is still very consistent for optional fields, media is faster though the difference decreases the more fields that are added, as seen in `Fig 11` and `Fig 12`.
+
+<details>
+  <summary>Tbl 7: String Benchmarks - Build Upon</summary>
+
+|                     Method |        Mean |     Error |    StdDev |
+|--------------------------- |------------:|----------:|----------:|
+|    Media_Req_One_BuildUpon |   146.83 ms |  2.882 ms |  4.735 ms |
+|     Json_Req_One_BuildUpon |    26.24 ms |  0.439 ms |  0.343 ms |
+|    Media_Req_Two_BuildUpon | 1,598.75 ms | 25.381 ms | 22.500 ms |
+|     Json_Req_Two_BuildUpon |   326.68 ms |  3.764 ms |  3.336 ms |
+|  Media_Req_Three_BuildUpon | 2,412.93 ms | 33.383 ms | 31.226 ms |
+|   Json_Req_Three_BuildUpon | 1,276.54 ms | 16.827 ms | 14.917 ms |
+|   Media_Req_Four_BuildUpon | 3,181.99 ms | 23.472 ms | 21.955 ms |
+|    Json_Req_Four_BuildUpon | 1,270.15 ms | 15.886 ms | 14.860 ms |
+|   Media_Req_Five_BuildUpon | 3,987.76 ms | 13.665 ms | 12.114 ms |
+|    Json_Req_Five_BuildUpon | 1,269.49 ms | 14.888 ms | 13.926 ms |
+|    Media_Req_Six_BuildUpon | 4,768.32 ms | 28.002 ms | 31.124 ms |
+|     Json_Req_Six_BuildUpon | 1,270.05 ms | 11.058 ms | 10.344 ms |
+|  Media_Req_Seven_BuildUpon | 5,562.17 ms | 23.576 ms | 22.053 ms |
+|   Json_Req_Seven_BuildUpon | 1,264.94 ms |  9.581 ms |  8.000 ms |
+|  Media_Req_Eight_BuildUpon | 6,349.26 ms | 38.729 ms | 34.332 ms |
+|   Json_Req_Eight_BuildUpon | 1,268.51 ms | 16.261 ms | 15.211 ms |
+|     Media_Op_One_BuildUpon |   100.09 ms |  1.952 ms |  2.922 ms |
+|      Json_Op_One_BuildUpon |   165.85 ms |  3.302 ms |  3.391 ms |
+|     Media_Op_Two_BuildUpon |   801.75 ms |  5.369 ms |  4.484 ms |
+|      Json_Op_Two_BuildUpon | 3,619.08 ms | 43.439 ms | 40.633 ms |
+|   Media_Op_Three_BuildUpon | 1,205.82 ms | 15.057 ms | 14.084 ms |
+|    Json_Op_Three_BuildUpon | 4,761.12 ms | 12.263 ms | 10.871 ms |
+|    Media_Op_Four_BuildUpon | 1,616.83 ms | 14.126 ms | 13.214 ms |
+|     Json_Op_Four_BuildUpon | 4,760.38 ms | 43.668 ms | 34.093 ms |
+|    Media_Op_Five_BuildUpon | 2,013.39 ms | 23.448 ms | 21.933 ms |
+|     Json_Op_Five_BuildUpon | 4,751.75 ms | 10.917 ms |  9.116 ms |
+|     Media_Op_Six_BuildUpon | 2,402.93 ms | 15.626 ms | 13.852 ms |
+|      Json_Op_Six_BuildUpon | 4,764.77 ms | 36.133 ms | 30.172 ms |
+|   Media_Op_Seven_BuildUpon | 2,818.16 ms | 34.750 ms | 32.505 ms |
+|    Json_Op_Seven_BuildUpon | 4,757.01 ms |  9.972 ms |  8.840 ms |
+|   Media_Op_Eight_BuildUpon | 3,208.73 ms | 32.084 ms | 30.012 ms |
+|    Json_Op_Eight_BuildUpon | 4,755.69 ms | 17.241 ms | 14.397 ms |
+|   Media_Both_Two_BuildUpon | 1,191.22 ms | 22.021 ms | 20.598 ms |
+|    Json_Both_Two_BuildUpon | 2,667.68 ms | 27.364 ms | 24.257 ms |
+|  Media_Both_Four_BuildUpon | 2,390.84 ms | 35.557 ms | 33.260 ms |
+|   Json_Both_Four_BuildUpon | 4,758.69 ms |  4.975 ms |  3.884 ms |
+|   Media_Both_Six_BuildUpon | 3,404.36 ms | 31.111 ms | 29.101 ms |
+|    Json_Both_Six_BuildUpon | 4,762.67 ms | 15.341 ms | 13.600 ms |
+| Media_Both_Eight_BuildUpon | 4,593.04 ms |  7.522 ms |  6.668 ms |
+|  Json_Both_Eight_BuildUpon | 4,756.97 ms |  8.630 ms |  7.651 ms |
+
+</details>
+
+<details>
+  <summary>Fig 9: String Benchmarks - Build Upon - Box Plot</summary>
+
+![Fig 9: String Benchmarks - Build Upon - Box Plot](readme%20files/results/String/string%20fields%20-%20buildupon/ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-boxplot-line.png)
+
+</details>
+
+<details>
+  <summary>Fig 10: String Benchmarks - Build Upon - Line Plot - Required Only</summary>
+
+![Fig 10: String Benchmarks - Build Upon - Line Plot - Required Only](readme%20files/results/String/string%20fields%20-%20buildupon/String%20Search%20Query%20-%20json%20vs%20media%20with%20required%20fields.png)
+
+</details>
+
+<details>
+  <summary>Fig 11: String Benchmarks - Build Upon - Line Plot - Optional Only</summary>
+
+![Fig 11: String Benchmarks - Build Upon - Line Plot - Optional Only](readme%20files/results/String/string%20fields%20-%20buildupon/String%20Search%20Query%20-%20json%20vs%20media%20with%20optional%20fields.png)
+
+</details>
+
+<details>
+  <summary>Fig 12: String Benchmarks - Build Upon - Line Plot - Both</summary>
+
+![Fig 12: String Benchmarks - Build Upon - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20buildupon/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20and%20required%20fields.png)
+
+</details>
 
 ---
 
