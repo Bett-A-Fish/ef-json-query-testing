@@ -22,16 +22,25 @@
     - [Misc](#misc)
     - [String](#string)
       - [String Categories](#string-categories)
+      - [Normal](#normal)
+      - [Build Upon](#build-upon)
+      - [Short String](#short-string)
+      - [Long String](#long-string)
+      - [Char Count](#char-count)
+      - [With Int](#with-int)
 
 ## Data Model
 
 I'm using the below structure to mimic what an ad hock query builder could use for testing user created queries.
+
 ![Ad hock query builder structure](readme%20files/dataModel/querybuilder.png)
 
-The structure for testing searching where each bit of information is saved as a seprate row in a table
+The structure for testing searching where each bit of information is saved as a seprate row in a table.
+
 ![Dynamic table structure](readme%20files/dataModel/media.png)
 
-The structure for testing searching with the information stored in JSON
+The structure for testing searching with the information stored in JSON.
+
 ![Json table structure](readme%20files/dataModel/json.png)
 
 Note: The dynamic table and json structures are separated into different models: `Media_Dynamic` and `Media_Json`
@@ -180,6 +189,8 @@ A lot of the benchmarks included in this project were done before the business d
 
 The plots are generated using the included `BuildPlots_alt.R` file.
 
+---
+
 ### No Columns
 
 The information in `Tbl 1` shows how the dynamic search pattern improved when columns were not required to be returned. While the benchmarks on the data types for int and bool show small improvements in speed, ones that include strings show a vast improvement based on how many rows were being requested. `set1` showing a drastic improvement from 30 seconds down to 1 second. `first` showing 3 seconds down to .5 seconds.
@@ -194,7 +205,8 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
   DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
 ```
 
-*Tbl 1: No Columns Benchmarks - dynamic* 
+<details>
+  <summary>Tbl 1: No Columns Benchmarks - dynamic</summary>
 |                                    Method |          Mean |         Error |        StdDev |
 |------------------------------------------ |--------------:|--------------:|--------------:|
 |                  Media_set1_both_int_bool |    145.070 ms |     2.5972 ms |     3.0917 ms |
@@ -224,7 +236,11 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 |             Media_first_req_string_single |    139.974 ms |     2.7730 ms |     6.8541 ms |
 |   Media_noColumns_first_req_string_single |    827.508 ms |     4.6228 ms |     3.8603 ms |
 
-*Tbl 2: No Columns Benchmarks - json* 
+</details>
+
+<details>
+  <summary>Tbl 2: No Columns Benchmarks - json</summary>
+
 |                                    Method |          Mean |         Error |        StdDev |
 |------------------------------------------ |--------------:|--------------:|--------------:|
 |               Indexed_first_both_bool_int |      6.642 ms |     0.1323 ms |     0.3531 ms |
@@ -254,14 +270,30 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 |            Indexed_set1_req_string_single |  1,404.229 ms |    23.8953 ms |    22.3517 ms |
 |  Indexed_noColumns_set1_req_string_single |  1,403.096 ms |    19.6017 ms |    18.3354 ms |
 
-*Fig 1: No Columns Benchmarks - first*
+</details>
+
+<details>
+  <summary>Fig 1: No Columns Benchmarks - first</summary>
+
 ![Fig 1: No Columns Benchmarks - first](readme%20files/results/No%20Columns/no%20columns%20-%20all/first/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
 
-*Fig 2: No Columns Benchmarks - set1*
+</details>
+
+<details>
+  <summary>Fig 2: No Columns Benchmarks - set1</summary>
+
 ![Fig 2: No Columns Benchmarks - set1](readme%20files/results/No%20Columns/no%20columns%20-%20all/set1/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
 
-*Fig 3: No Columns Benchmarks - strings only*
+</details>
+
+<details>
+  <summary>Fig 3: No Columns Benchmarks - strings only</summary>
+
 ![Fig 3: No Columns Benchmarks - strings only](readme%20files/results/No%20Columns/no%20columns%20-%20string%20only/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+
+</details>
+
+---
 
 ### Date Field
 
@@ -269,7 +301,9 @@ Date fields were not originally included in the benchmarks because additional wo
 
 `Tbl 3` is a collection of data taken from the previous tables and the benchmark runs for Date fields to compare the search times for dates against those without. Dates can be seen to slightly increase search time for both json and dynamic search styles. Most drastically for dynamic when searching over both required and optional fields with a difference of 322ms. Json is seen to consistently run faster than the dynamic search.
 
-*Tbl 3:  Date Field Benchmarks*
+<details>
+  <summary>Tbl 3:  Date Field Benchmarks</summary>
+
 |                                     Method |       Mean |     Error |    StdDev |
 |------------------------------------------- |-----------:|----------:|----------:|
 |            Indexed_noColumns_set1_req_date |   13.08 ms |  0.259 ms |  0.467 ms |
@@ -289,13 +323,19 @@ Date fields were not originally included in the benchmarks because additional wo
 |   Media_noColumns_first_both_date_int_bool |  398.38 ms |  5.232 ms |  4.638 ms |
 |        Media_noColumns_first_both_bool_int | 134.785 ms | 1.9739 ms | 1.8464 ms |
 
+</details>
+
+---
+
 ### Misc
 
 The misc benchmarks are a collection of benchmarks I pulled from other places when I wanted to further dig into what was causing the odd search times in certain scenarios. It also includes extra benchmarks to compare to the oddities.
 
 `Tbl 4` shows a collection of different benchmarks comparing json and dynamics no columns search patterns. For the data types of int, bool, and date, json is consistently faster than the dynamic search. `Tbl 5` is string only searches and is where the data gets strange. In most test cases where all fields searched are required, json runs faster. However, there seems to be a correlation between the field count and when the dynamic pattern would run faster. Fo the optional field searches, json was consistently worse than the dynamic search. Which leads into the next set of benchmarks focused on strings that go into more detail on these oddities.
 
-*Tbl 4:  Misc Benchmarks - int, bool, and dates*
+<details>
+  <summary>Tbl 4:  Misc Benchmarks - int, bool, and dates</summary>
+  
 |                                      Method |          Mean |       Error |        StdDev | Field Count |
 |-------------------------------------------- |--------------:|------------:|--------------:|------------:|
 |         Media_NoColumns_first_both_bool_int |    137.736 ms |   1.7443 ms |     1.5463 ms |           6 |
@@ -313,7 +353,11 @@ The misc benchmarks are a collection of benchmarks I pulled from other places wh
 |              Media_NoColumns_set1_both_date |    464.646 ms |   5.6165 ms |     4.6900 ms |           5 |
 |            Indexed_NoColumns_set1_both_date |    157.691 ms |   2.4201 ms |     2.5894 ms |           5 |
 
-*Tbl 5:  Misc Benchmarks - strings*
+</details>
+
+<details>
+  <summary>Tbl 5:  Misc Benchmarks - strings</summary>
+
 |                                      Method |          Mean |       Error |        StdDev | Field Count |
 |-------------------------------------------- |--------------:|------------:|--------------:|------------:|
 |            Media_NoColumns_first_req_string |  3,184.654 ms |  60.3905 ms |    56.4893 ms |           4 |
@@ -335,8 +379,16 @@ The misc benchmarks are a collection of benchmarks I pulled from other places wh
 |       Media_NoColumns_set1_op_string_single |    437.780 ms |   8.5108 ms |     7.1069 ms |           1 |
 |     Indexed_NoColumns_set1_op_string_single |  2,577.872 ms |  41.3992 ms |    38.7249 ms |           1 |
 
-*Fig 4:  Misc Benchmarks*
+</details>
+
+<details>
+  <summary>Fig 4:  Misc Benchmarks</summary>
+
 ![Fig 4:  Misc Benchmarks](readme%20files/results/Misc/misc%20run%20reduced%20data/miscTests-media-allcolumns-index-allcolumns-removed-line-boxplot.png)
+
+</details>
+
+---
 
 ### String
 
@@ -351,3 +403,26 @@ These benchmarks use a different database than those above. The file for it has 
 - `charcount` - Each search is over 4 fields with the lengths of the strings increasing in each search
 - `withint` - A copy of `buildupon` with a required int field added onto each search
 
+---
+
+#### Normal
+
+---
+
+#### Build Upon
+
+---
+
+#### Short String
+
+---
+
+#### Long String
+
+---
+
+#### Char Count
+
+---
+
+#### With Int
