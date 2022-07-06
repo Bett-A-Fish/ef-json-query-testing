@@ -258,10 +258,10 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 ![Fig 1: No Columns Benchmarks - first](readme%20files/results/No%20Columns/no%20columns%20-%20all/first/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
 
 *Fig 2: No Columns Benchmarks - set1*
-![Fig 2: No Columns Benchmarks - set1](readme%20files/Cresults/CNo%20Columns/Cno%20columns%20-%20all/Cset1/Cef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+![Fig 2: No Columns Benchmarks - set1](readme%20files/results/No%20Columns/no%20columns%20-%20all/set1/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
 
 *Fig 3: No Columns Benchmarks - strings only*
-![Fig 3: No Columns Benchmarks - strings only](readme%20files/Cresults/CNo%20Columns/Cno%20columns%20-%20string%20only/Cef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
+![Fig 3: No Columns Benchmarks - strings only](readme%20files/results/No%20Columns/no%20columns%20-%20string%20only/ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-boxplot.png)
 
 ### Date Field
 
@@ -336,7 +336,7 @@ The misc benchmarks are a collection of benchmarks I pulled from other places wh
 |     Indexed_NoColumns_set1_op_string_single |   Indexed,op |  2,577.872 ms |  41.3992 ms |    38.7249 ms |           1 |
 
 *Fig 4:  Misc Benchmarks*
-![Fig 4:  Misc Benchmarks](readme%20files/Cresults/CMisc/Cmisc%20run%20reduced%20data/CmiscTests-media-allcolumns-index-allcolumns-removed-line-boxplot.png)
+![Fig 4:  Misc Benchmarks](readme%20files/results/Misc/misc%20run%20reduced%20data/miscTests-media-allcolumns-index-allcolumns-removed-line-boxplot.png)
 
 ### String
 
