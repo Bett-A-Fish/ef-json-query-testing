@@ -463,7 +463,7 @@ This first run was somewhat informative. It showed a basic pattern that the dyna
 <details>
   <summary>Fig 5: String Benchmarks - Normal - Box Plot</summary>
 
-![Fig 5: String Benchmarks - Normal - Box Plot](readme%20files/results/String/string%20fields%20-%20normal/ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-boxplot-lines.png)
+![Fig 5: String Benchmarks - Normal - Box Plot](readme%20files/results/String/string%20fields%20-%20normal/ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-boxplot-line.png)
 
 </details>
 
@@ -484,7 +484,7 @@ This first run was somewhat informative. It showed a basic pattern that the dyna
 <details>
   <summary>Fig 8: String Benchmarks - Normal - Line Plot - Both</summary>
 
-![Fig 8: String Benchmarks - Normal - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20normal/String%20Search%20Query%20-%20json%20vs%20media%20with%20both%20fields.png)
+![Fig 8: String Benchmarks - Normal - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20normal/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20optional%20and%20required%20fields.png)
 
 </details>
 
@@ -581,7 +581,7 @@ This style looks to have worked. As there is no longer any unexpected changes in
 <details>
   <summary>Fig 12: String Benchmarks - Build Upon - Line Plot - Both</summary>
 
-![Fig 12: String Benchmarks - Build Upon - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20buildupon/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20and%20required%20fields.png)
+![Fig 12: String Benchmarks - Build Upon - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20buildupon/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20optional%20and%20required%20fields.png)
 
 </details>
 
