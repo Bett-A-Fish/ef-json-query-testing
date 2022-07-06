@@ -207,6 +207,7 @@ AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
 
 <details>
   <summary>Tbl 1: No Columns Benchmarks - dynamic</summary>
+  
 |                                    Method |          Mean |         Error |        StdDev |
 |------------------------------------------ |--------------:|--------------:|--------------:|
 |                  Media_set1_both_int_bool |    145.070 ms |     2.5972 ms |     3.0917 ms |
