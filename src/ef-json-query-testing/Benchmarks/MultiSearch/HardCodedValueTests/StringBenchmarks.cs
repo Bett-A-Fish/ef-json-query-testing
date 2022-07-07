@@ -1365,6 +1365,234 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
         [BenchmarkCategory("json", "eight", "both", "withint")]
         public void Json_Both_Eight_WithInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithInt.Eight_Both);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "one", "req", "optionalint")]
+        public void Media_Req_One_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.One_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "one", "req", "optionalint")]
+        public void Json_Req_One_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.One_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "two", "req", "optionalint")]
+        public void Media_Req_Two_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "two", "req", "optionalint")]
+        public void Json_Req_Two_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "three", "req", "optionalint")]
+        public void Media_Req_Three_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Three_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "three", "req", "optionalint")]
+        public void Json_Req_Three_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Three_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "four", "req", "optionalint")]
+        public void Media_Req_Four_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "four", "req", "optionalint")]
+        public void Json_Req_Four_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Required);
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "five", "req", "optionalint")]
+        public void Media_Req_Five_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Five_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "five", "req", "optionalint")]
+        public void Json_Req_Five_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Five_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "six", "req", "optionalint")]
+        public void Media_Req_Six_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "six", "req", "optionalint")]
+        public void Json_Req_Six_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "seven", "req", "optionalint")]
+        public void Media_Req_Seven_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Seven_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "seven", "req", "optionalint")]
+        public void Json_Req_Seven_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Seven_Required);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "eight", "req", "optionalint")]
+        public void Media_Req_Eight_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Required);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "eight", "req", "optionalint")]
+        public void Json_Req_Eight_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Required);
+
+
+
+
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "one", "op", "optionalint")]
+        public void Media_Op_One_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.One_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "one", "op", "optionalint")]
+        public void Json_Op_One_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.One_Optional);
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "two", "op", "optionalint")]
+        public void Media_Op_Two_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "two", "op", "optionalint")]
+        public void Json_Op_Two_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Optional);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "three", "op", "optionalint")]
+        public void Media_Op_Three_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Three_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "three", "op", "optionalint")]
+        public void Json_Op_Three_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Three_Optional);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "four", "op", "optionalint")]
+        public void Media_Op_Four_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "four", "op", "optionalint")]
+        public void Json_Op_Four_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Optional);
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "five", "op", "optionalint")]
+        public void Media_Op_Five_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Five_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "five", "op", "optionalint")]
+        public void Json_Op_Five_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Five_Optional);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "six", "op", "optionalint")]
+        public void Media_Op_Six_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "six", "op", "optionalint")]
+        public void Json_Op_Six_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Optional);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "seven", "op", "optionalint")]
+        public void Media_Op_Seven_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Seven_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "seven", "op", "optionalint")]
+        public void Json_Op_Seven_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Seven_Optional);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "eight", "op", "optionalint")]
+        public void Media_Op_Eight_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Optional);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "eight", "op", "optionalint")]
+        public void Json_Op_Eight_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Optional);
+
+
+
+
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "two", "both", "optionalint")]
+        public void Media_Both_Two_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Both);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "two", "both", "optionalint")]
+        public void Json_Both_Two_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Two_Both);
+
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "four", "both", "optionalint")]
+        public void Media_Both_Four_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Both);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "four", "both", "optionalint")]
+        public void Json_Both_Four_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Four_Both);
+
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "six", "both", "optionalint")]
+        public void Media_Both_Six_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Both);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "six", "both", "optionalint")]
+        public void Json_Both_Six_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Six_Both);
+
+
+
+        [Benchmark]
+        [BenchmarkCategory("media", "eight", "both", "optionalint")]
+        public void Media_Both_Eight_WithOptionalInt() => Search.TableSearch_Media_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Both);
+
+        [Benchmark]
+        [BenchmarkCategory("json", "eight", "both", "optionalint")]
+        public void Json_Both_Eight_WithOptionalInt() => Search.JsonSearch_Indexed_NoColumns(StringTestValueConstants_WithOptionalInt.Eight_Both);
+
     }
 
     public static class StringTestValueConstants
@@ -2183,8 +2411,6 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
             };
     }
 
-
-
     public static class StringTestValueConstants_WithInt
     {
         public static Dictionary<int, string> One_Required = new Dictionary<int, string>() {
@@ -2366,6 +2592,191 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
                 { 11 , "dolore" },
                 { 12 , "eveniet" },
                     {  41 , "712704215" },
+            };
+
+    }
+
+    public static class StringTestValueConstants_WithOptionalInt
+    {
+        public static Dictionary<int, string> One_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                    {  42 , "220722582" }
+            };
+
+        public static Dictionary<int, string> Two_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Three_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Four_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                { 7 , "quod" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Five_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                { 7 , "quod" },
+                { 8 , "itaque" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Six_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                { 7 , "quod" },
+                { 8 , "itaque" },
+                { 9 , "beatae" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Seven_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                { 7 , "quod" },
+                { 8 , "itaque" },
+                { 9 , "beatae" },
+                { 10 , "eligendi" },
+                    {  42 , "220722582" },
+            };
+
+        public static Dictionary<int, string> Eight_Required = new Dictionary<int, string>() {
+                { 1 , "possimus" },
+                { 2 , "tempore" },
+                { 3 , "numquam" },
+                { 7 , "quod" },
+                { 8 , "itaque" },
+                { 9 , "beatae" },
+                { 10 , "eligendi" },
+                { 14 , "possimus" },
+                    {  42 , "220722582" },
+            };
+
+
+
+
+
+        public static Dictionary<int, string> One_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Two_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Three_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Four_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                { 34 , "tempore" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Five_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                { 34 , "tempore" },
+                { 31 , "harum" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Six_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                { 34 , "tempore" },
+                { 31 , "harum" },
+                { 28 , "velit" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Seven_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                { 34 , "tempore" },
+                { 31 , "harum" },
+                { 28 , "velit" },
+                { 27 , "itaque" },
+                    {  42 , "1775240006" },
+            };
+
+        public static Dictionary<int, string> Eight_Optional = new Dictionary<int, string>() {
+                { 40 , "alias" },
+                { 38 , "veritatis" },
+                { 36 , "rerum" },
+                { 34 , "tempore" },
+                { 31 , "harum" },
+                { 28 , "velit" },
+                { 27 , "itaque" },
+                { 33 , "quos" },
+                    {  42 , "1775240006" },
+            };
+
+
+
+
+
+
+        public static Dictionary<int, string> Two_Both = new Dictionary<int, string>() {
+                { 32 , "facere" },
+                { 4 ,  "enim" },
+                    {  42 , "1928380945" },
+            };
+
+        public static Dictionary<int, string> Four_Both = new Dictionary<int, string>() {
+                { 32 , "facere" },
+                { 31 , "nostrum" },
+                { 4 ,  "enim" },
+                { 8 ,  "dolore" },
+                    {  42 , "1928380945" },
+            };
+
+        public static Dictionary<int, string> Six_Both = new Dictionary<int, string>() {
+                { 32 , "facere" },
+                { 31 , "nostrum" },
+                { 39 , "nesciunt" },
+                { 4 ,  "enim" },
+                { 8 ,  "dolore" },
+                { 9 , "culpa" },
+                    {  42 , "1928380945" },
+            };
+
+        public static Dictionary<int, string> Eight_Both = new Dictionary<int, string>() {
+                { 32 , "facere" },
+                { 31 , "nostrum" },
+                { 39 , "nesciunt" },
+                { 35 , "minus" },
+                { 4 ,  "enim" },
+                { 8 ,  "dolore" },
+                { 9 ,  "culpa" },
+                { 10 , "libero" },
+                    {  42 , "1928380945" },
             };
 
     }
