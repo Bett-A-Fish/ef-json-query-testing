@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.StringBenchmarks-20220630-153751</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>            Method</th><th>        Categories</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th>
+</tr>
+</thead><tbody><tr><td>Media_Req_One_WithInt</td><td>media,one,req,withint</td><td>44.794 ms</td><td>0.7572 ms</td><td>0.9299 ms</td><td>44.830 ms</td>
+</tr><tr><td>Json_Req_One_WithInt</td><td>json,one,req,withint</td><td>1.224 ms</td><td>0.0460 ms</td><td>0.1334 ms</td><td>1.232 ms</td>
+</tr><tr><td>Media_Req_Two_WithInt</td><td>media,two,req,withint</td><td>43.671 ms</td><td>0.5532 ms</td><td>0.5175 ms</td><td>43.480 ms</td>
+</tr><tr><td>Json_Req_Two_WithInt</td><td>json,two,req,withint</td><td>1.204 ms</td><td>0.0480 ms</td><td>0.1378 ms</td><td>1.193 ms</td>
+</tr><tr><td>Media_Req_Three_WithInt</td><td>media,three,req,withint</td><td>43.581 ms</td><td>0.6628 ms</td><td>0.6200 ms</td><td>43.691 ms</td>
+</tr><tr><td>Json_Req_Three_WithInt</td><td>json,three,req,withint</td><td>1.262 ms</td><td>0.0489 ms</td><td>0.1434 ms</td><td>1.252 ms</td>
+</tr><tr><td>Media_Req_Four_WithInt</td><td>media,four,req,withint</td><td>45.218 ms</td><td>0.7148 ms</td><td>0.6686 ms</td><td>45.258 ms</td>
+</tr><tr><td>Json_Req_Four_WithInt</td><td>json,four,req,withint</td><td>1.262 ms</td><td>0.0473 ms</td><td>0.1372 ms</td><td>1.236 ms</td>
+</tr><tr><td>Media_Req_Five_WithInt</td><td>media,five,req,withint</td><td>44.746 ms</td><td>0.6628 ms</td><td>0.5876 ms</td><td>44.728 ms</td>
+</tr><tr><td>Json_Req_Five_WithInt</td><td>json,five,req,withint</td><td>1.306 ms</td><td>0.0409 ms</td><td>0.1167 ms</td><td>1.289 ms</td>
+</tr><tr><td>Media_Req_Six_WithInt</td><td>media,six,req,withint</td><td>44.625 ms</td><td>0.5108 ms</td><td>0.4528 ms</td><td>44.605 ms</td>
+</tr><tr><td>Json_Req_Six_WithInt</td><td>json,six,req,withint</td><td>1.355 ms</td><td>0.0512 ms</td><td>0.1501 ms</td><td>1.359 ms</td>
+</tr><tr><td>Media_Req_Seven_WithInt</td><td>media,seven,req,withint</td><td>45.030 ms</td><td>0.8944 ms</td><td>0.7469 ms</td><td>45.115 ms</td>
+</tr><tr><td>Json_Req_Seven_WithInt</td><td>json,seven,req,withint</td><td>1.368 ms</td><td>0.0524 ms</td><td>0.1529 ms</td><td>1.373 ms</td>
+</tr><tr><td>Media_Req_Eight_WithInt</td><td>media,eight,req,withint</td><td>45.482 ms</td><td>0.8708 ms</td><td>0.8145 ms</td><td>45.567 ms</td>
+</tr><tr><td>Json_Req_Eight_WithInt</td><td>json,eight,req,withint</td><td>1.455 ms</td><td>0.0517 ms</td><td>0.1501 ms</td><td>1.438 ms</td>
+</tr><tr><td>Media_Op_One_WithInt</td><td>media,one,op,withint</td><td>44.364 ms</td><td>0.5180 ms</td><td>0.4592 ms</td><td>44.318 ms</td>
+</tr><tr><td>Json_Op_One_WithInt</td><td>json,one,op,withint</td><td>1.294 ms</td><td>0.0561 ms</td><td>0.1637 ms</td><td>1.309 ms</td>
+</tr><tr><td>Media_Op_Two_WithInt</td><td>media,two,op,withint</td><td>45.643 ms</td><td>0.7027 ms</td><td>0.6573 ms</td><td>45.486 ms</td>
+</tr><tr><td>Json_Op_Two_WithInt</td><td>json,two,op,withint</td><td>1.281 ms</td><td>0.0526 ms</td><td>0.1534 ms</td><td>1.310 ms</td>
+</tr><tr><td>Media_Op_Three_WithInt</td><td>media,three,op,withint</td><td>47.429 ms</td><td>0.7521 ms</td><td>0.7035 ms</td><td>47.544 ms</td>
+</tr><tr><td>Json_Op_Three_WithInt</td><td>json,three,op,withint</td><td>1.327 ms</td><td>0.0496 ms</td><td>0.1431 ms</td><td>1.333 ms</td>
+</tr><tr><td>Media_Op_Four_WithInt</td><td>media,four,op,withint</td><td>47.372 ms</td><td>0.9432 ms</td><td>1.3825 ms</td><td>47.107 ms</td>
+</tr><tr><td>Json_Op_Four_WithInt</td><td>json,four,op,withint</td><td>1.408 ms</td><td>0.0483 ms</td><td>0.1409 ms</td><td>1.379 ms</td>
+</tr><tr><td>Media_Op_Five_WithInt</td><td>media,five,op,withint</td><td>47.577 ms</td><td>0.8963 ms</td><td>0.9204 ms</td><td>47.570 ms</td>
+</tr><tr><td>Json_Op_Five_WithInt</td><td>json,five,op,withint</td><td>1.495 ms</td><td>0.0500 ms</td><td>0.1450 ms</td><td>1.500 ms</td>
+</tr><tr><td>Media_Op_Six_WithInt</td><td>media,six,op,withint</td><td>47.997 ms</td><td>0.8303 ms</td><td>0.8527 ms</td><td>48.007 ms</td>
+</tr><tr><td>Json_Op_Six_WithInt</td><td>json,six,op,withint</td><td>1.560 ms</td><td>0.0802 ms</td><td>0.2340 ms</td><td>1.488 ms</td>
+</tr><tr><td>Media_Op_Seven_WithInt</td><td>media,seven,op,withint</td><td>46.671 ms</td><td>0.5342 ms</td><td>0.4461 ms</td><td>46.636 ms</td>
+</tr><tr><td>Json_Op_Seven_WithInt</td><td>json,seven,op,withint</td><td>1.571 ms</td><td>0.0465 ms</td><td>0.1357 ms</td><td>1.535 ms</td>
+</tr><tr><td>Media_Op_Eight_WithInt</td><td>media,eight,op,withint</td><td>47.579 ms</td><td>0.9378 ms</td><td>0.9630 ms</td><td>47.390 ms</td>
+</tr><tr><td>Json_Op_Eight_WithInt</td><td>json,eight,op,withint</td><td>1.626 ms</td><td>0.0493 ms</td><td>0.1431 ms</td><td>1.585 ms</td>
+</tr><tr><td>Media_Both_Two_WithInt</td><td>media,two,both,withint</td><td>43.603 ms</td><td>0.4240 ms</td><td>0.3540 ms</td><td>43.492 ms</td>
+</tr><tr><td>Json_Both_Two_WithInt</td><td>json,two,both,withint</td><td>1.268 ms</td><td>0.0418 ms</td><td>0.1214 ms</td><td>1.274 ms</td>
+</tr><tr><td>Media_Both_Four_WithInt</td><td>media,four,both,withint</td><td>45.548 ms</td><td>0.8413 ms</td><td>1.6006 ms</td><td>45.268 ms</td>
+</tr><tr><td>Json_Both_Four_WithInt</td><td>json,four,both,withint</td><td>1.445 ms</td><td>0.0551 ms</td><td>0.1616 ms</td><td>1.433 ms</td>
+</tr><tr><td>Media_Both_Six_WithInt</td><td>media,six,both,withint</td><td>45.010 ms</td><td>0.6056 ms</td><td>0.5057 ms</td><td>45.106 ms</td>
+</tr><tr><td>Json_Both_Six_WithInt</td><td>json,six,both,withint</td><td>1.591 ms</td><td>0.0551 ms</td><td>0.1617 ms</td><td>1.598 ms</td>
+</tr><tr><td>Media_Both_Eight_WithInt</td><td>media,eight,both,withint</td><td>45.163 ms</td><td>0.7213 ms</td><td>0.6023 ms</td><td>45.015 ms</td>
+</tr><tr><td>Json_Both_Eight_WithInt</td><td>json,eight,both,withint</td><td>1.721 ms</td><td>0.0542 ms</td><td>0.1564 ms</td><td>1.705 ms</td>
+</tr></tbody></table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.NoColumnsBenchmarks-20220621-140829</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.300
+  [Host]     : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+  DefaultJob : .NET 6.0.5 (6.0.522.21309), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                             Method</th><th>             Categories</th><th>  Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>Indexed_first_both_bool_int</td><td>json,hascolumns,indexed,first</td><td>6.642 ms</td><td>0.1323 ms</td><td>0.3531 ms</td>
+</tr><tr><td>Media_first_both_bool_int</td><td>table,hascolumns,media,first</td><td>134.972 ms</td><td>1.4135 ms</td><td>1.2530 ms</td>
+</tr><tr><td>Indexed_first_req_bool_int</td><td>json,hascolumns,indexed,first</td><td>28.642 ms</td><td>0.5380 ms</td><td>0.4492 ms</td>
+</tr><tr><td>Media_first_req_bool_int</td><td>table,hascolumns,media,first</td><td>249.123 ms</td><td>3.3765 ms</td><td>2.8195 ms</td>
+</tr><tr><td>Indexed_first_op_int</td><td>json,hascolumns,indexed,first</td><td>4.765 ms</td><td>0.0953 ms</td><td>0.2494 ms</td>
+</tr><tr><td>Media_first_op_int</td><td>table,hascolumns,media,first</td><td>89.694 ms</td><td>1.7909 ms</td><td>2.3287 ms</td>
+</tr><tr><td>Indexed_first_req_string</td><td>json,hascolumns,indexed,first</td><td>1,466.409 ms</td><td>28.4672 ms</td><td>26.6282 ms</td>
+</tr><tr><td>Media_first_req_string</td><td>table,hascolumns,media,first</td><td>3,132.863 ms</td><td>28.2227 ms</td><td>26.3995 ms</td>
+</tr><tr><td>Indexed_first_op_string</td><td>json,hascolumns,indexed,first</td><td>2,511.278 ms</td><td>15.3365 ms</td><td>14.3458 ms</td>
+</tr><tr><td>Media_first_op_string</td><td>table,hascolumns,media,first</td><td>492.253 ms</td><td>6.4743 ms</td><td>5.0547 ms</td>
+</tr><tr><td>Indexed_first_op_string_single</td><td>json,hascolumns,indexed,first</td><td>2,501.888 ms</td><td>6.5184 ms</td><td>5.0891 ms</td>
+</tr><tr><td>Media_first_op_string_single</td><td>table,hascolumns,media,first</td><td>76.057 ms</td><td>2.1989 ms</td><td>6.4490 ms</td>
+</tr><tr><td>Indexed_first_req_string_single</td><td>json,hascolumns,indexed,first</td><td>1,410.806 ms</td><td>22.5999 ms</td><td>21.1400 ms</td>
+</tr><tr><td>Media_first_req_string_single</td><td>table,hascolumns,media,first</td><td>139.974 ms</td><td>2.7730 ms</td><td>6.8541 ms</td>
+</tr><tr><td>Indexed_noColumns_first_both_bool_int</td><td>json,nocolumns,indexed,first</td><td>6.440 ms</td><td>0.1281 ms</td><td>0.3094 ms</td>
+</tr><tr><td>Media_noColumns_first_both_bool_int</td><td>table,nocolumns,media,first</td><td>134.785 ms</td><td>1.9739 ms</td><td>1.8464 ms</td>
+</tr><tr><td>Indexed_noColumns_first_req_bool_int</td><td>json,nocolumns,indexed,first</td><td>27.370 ms</td><td>0.3812 ms</td><td>0.3184 ms</td>
+</tr><tr><td>Media_noColumns_first_req_bool_int</td><td>table,nocolumns,media,first</td><td>265.708 ms</td><td>5.0133 ms</td><td>4.4442 ms</td>
+</tr><tr><td>Indexed_noColumns_first_op_int</td><td>json,nocolumns,indexed,first</td><td>4.515 ms</td><td>0.0884 ms</td><td>0.1452 ms</td>
+</tr><tr><td>Media_noColumns_first_op_int</td><td>table,nocolumns,media,first</td><td>90.168 ms</td><td>1.6429 ms</td><td>1.3719 ms</td>
+</tr><tr><td>Indexed_noColumns_first_req_string</td><td>json,nocolumns,indexed,first</td><td>1,463.739 ms</td><td>19.8935 ms</td><td>18.6084 ms</td>
+</tr><tr><td>Media_noColumns_first_req_string</td><td>table,nocolumns,media,first</td><td>3,125.529 ms</td><td>28.1682 ms</td><td>26.3485 ms</td>
+</tr><tr><td>Indexed_noColumns_first_op_string</td><td>json,nocolumns,indexed,first</td><td>2,517.308 ms</td><td>24.1128 ms</td><td>21.3753 ms</td>
+</tr><tr><td>Media_noColumns_first_op_string</td><td>table,nocolumns,media,first</td><td>494.283 ms</td><td>8.9849 ms</td><td>9.9867 ms</td>
+</tr><tr><td>Indexed_noColumns_first_op_string_single</td><td>json,nocolumns,indexed,first</td><td>2,513.694 ms</td><td>19.7399 ms</td><td>17.4989 ms</td>
+</tr><tr><td>Media_noColumns_first_op_string_single</td><td>table,nocolumns,media,first</td><td>406.639 ms</td><td>5.1703 ms</td><td>4.3175 ms</td>
+</tr><tr><td>Indexed_noColumns_first_req_string_single</td><td>json,nocolumns,indexed,first</td><td>1,409.895 ms</td><td>26.6260 ms</td><td>24.9060 ms</td>
+</tr><tr><td>Media_noColumns_first_req_string_single</td><td>table,nocolumns,media,first</td><td>827.508 ms</td><td>4.6228 ms</td><td>3.8603 ms</td>
+</tr></tbody></table>
+</body>
+</html>

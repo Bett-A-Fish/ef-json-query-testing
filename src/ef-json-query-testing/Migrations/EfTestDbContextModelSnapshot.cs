@@ -52,10 +52,6 @@ namespace ef_json_query_testing
                     b.Property<bool>("IsRequired")
                         .HasColumnType("bit");
 
-                    b.Property<string>("JsonName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("DynamicFieldId");
 
                     b.HasIndex("DynamicListTypeId");
