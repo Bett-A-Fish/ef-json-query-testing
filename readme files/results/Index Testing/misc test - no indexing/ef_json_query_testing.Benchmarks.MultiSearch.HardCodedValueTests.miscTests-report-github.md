@@ -1,0 +1,44 @@
+``` ini
+
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.301
+  [Host]     : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+  DefaultJob : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+
+
+```
+|                                      Method |                                    Categories |        Mean |     Error |    StdDev |      Median |
+|-------------------------------------------- |---------------------------------------------- |------------:|----------:|----------:|------------:|
+|       Indexed_NoColumns_first_both_bool_int |       Indexed,NoColumns,6fields,both,bool,int |   337.93 ms |  6.630 ms |  9.076 ms |   338.49 ms |
+|        Indexed_NoColumns_first_req_bool_int |        Indexed,NoColumns,7fields,req,bool,int |    43.92 ms |  0.875 ms |  1.644 ms |    43.05 ms |
+|              Indexed_NoColumns_first_op_int |              Indexed,NoColumns,4fields,op,int |   332.40 ms |  6.556 ms |  5.811 ms |   333.38 ms |
+|          Indexed_NoColumns_first_req_string |          Indexed,NoColumns,4fields,req,string | 1,475.95 ms | 11.583 ms | 10.268 ms | 1,472.80 ms |
+|           Indexed_NoColumns_first_op_string |           Indexed,NoColumns,3fields,op,string | 2,561.59 ms | 16.619 ms | 14.732 ms | 2,560.87 ms |
+|    Indexed_NoColumns_first_op_string_single |           Indexed,NoColumns,1fields,op,string | 2,554.74 ms | 15.754 ms | 13.965 ms | 2,551.35 ms |
+|   Indexed_NoColumns_first_req_string_single |          Indexed,NoColumns,1fields,req,string | 1,413.70 ms |  7.828 ms |  6.939 ms | 1,410.61 ms |
+|  Indexed_NoColumns_first_both_date_int_bool |  Indexed,NoColumns,9fields,both,bool,int,date |   315.47 ms |  5.305 ms |  4.702 ms |   313.73 ms |
+|           Indexed_NoColumns_set1_req_string |          Indexed,NoColumns,2fields,req,string |   432.84 ms |  8.642 ms | 17.458 ms |   422.66 ms |
+|     Indexed_NoColumns_set1_op_string_single |           Indexed,NoColumns,1fields,op,string | 2,588.05 ms | 35.577 ms | 33.278 ms | 2,599.30 ms |
+|    Indexed_NoColumns_set1_req_string_single |          Indexed,NoColumns,1fields,req,string | 1,433.07 ms | 28.497 ms | 34.997 ms | 1,415.50 ms |
+|           Indexed_NoColumns_set2_req_string |          Indexed,NoColumns,2fields,req,string |   415.97 ms |  6.713 ms |  5.950 ms |   414.19 ms |
+|    Indexed_NoColumns_set2_req_string_single |          Indexed,NoColumns,1fields,req,string | 1,406.49 ms | 27.769 ms | 29.712 ms | 1,388.86 ms |
+|             Indexed_NoColumns_set1_req_date |            Indexed,NoColumns,3fields,req,date |    13.81 ms |  0.166 ms |  0.148 ms |    13.76 ms |
+|              Indexed_NoColumns_set1_op_date |             Indexed,NoColumns,2fields,op,date |    38.78 ms |  0.701 ms |  0.656 ms |    39.02 ms |
+|            Indexed_NoColumns_set1_both_date |           Indexed,NoColumns,5fields,both,date |   156.83 ms |  0.935 ms |  0.874 ms |   156.92 ms |
+|      Indexed_AllColumns_first_both_bool_int |      Indexed,AllColumns,6fields,both,bool,int |   334.06 ms |  6.618 ms |  5.526 ms |   335.21 ms |
+|       Indexed_AllColumns_first_req_bool_int |       Indexed,AllColumns,7fields,req,bool,int |    44.82 ms |  0.894 ms |  2.142 ms |    43.96 ms |
+|             Indexed_AllColumns_first_op_int |             Indexed,AllColumns,4fields,op,int |   336.37 ms |  6.638 ms |  9.936 ms |   333.94 ms |
+|         Indexed_AllColumns_first_req_string |         Indexed,AllColumns,4fields,req,string | 1,492.40 ms | 29.226 ms | 32.485 ms | 1,471.27 ms |
+|          Indexed_AllColumns_first_op_string |          Indexed,AllColumns,3fields,op,string | 2,589.51 ms | 37.761 ms | 35.322 ms | 2,593.95 ms |
+|   Indexed_AllColumns_first_op_string_single |          Indexed,AllColumns,1fields,op,string | 2,576.61 ms | 18.100 ms | 16.930 ms | 2,584.21 ms |
+|  Indexed_AllColumns_first_req_string_single |         Indexed,AllColumns,1fields,req,string | 1,431.76 ms | 26.550 ms | 26.075 ms | 1,417.25 ms |
+| Indexed_AllColumns_first_both_date_int_bool | Indexed,AllColumns,9fields,both,bool,int,date |   317.12 ms |  6.016 ms |  5.333 ms |   317.41 ms |
+|          Indexed_AllColumns_set1_req_string |         Indexed,AllColumns,2fields,req,string |   425.95 ms |  8.372 ms |  8.223 ms |   422.30 ms |
+|    Indexed_AllColumns_set1_op_string_single |          Indexed,AllColumns,1fields,op,string | 2,632.07 ms | 32.444 ms | 30.348 ms | 2,641.26 ms |
+|   Indexed_AllColumns_set1_req_string_single |         Indexed,AllColumns,1fields,req,string | 1,432.32 ms | 28.484 ms | 26.644 ms | 1,420.37 ms |
+|          Indexed_AllColumns_set2_req_string |         Indexed,AllColumns,2fields,req,string |   423.53 ms |  8.339 ms | 11.415 ms |   418.08 ms |
+|   Indexed_AllColumns_set2_req_string_single |         Indexed,AllColumns,1fields,req,string | 1,419.59 ms | 27.272 ms | 29.180 ms | 1,404.64 ms |
+|            Indexed_AllColumns_set1_req_date |           Indexed,AllColumns,3fields,req,date |    23.42 ms |  0.372 ms |  0.545 ms |    23.27 ms |
+|             Indexed_AllColumns_set1_op_date |            Indexed,AllColumns,2fields,op,date |    44.23 ms |  0.865 ms |  1.372 ms |    43.74 ms |
+|           Indexed_AllColumns_set1_both_date |          Indexed,AllColumns,5fields,both,date |   161.06 ms |  2.249 ms |  2.310 ms |   160.79 ms |

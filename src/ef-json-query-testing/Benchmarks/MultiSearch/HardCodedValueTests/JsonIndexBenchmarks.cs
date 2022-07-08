@@ -6,7 +6,7 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
     {
         // run with indexes
         // run without indexes on columns 1 and 2
-        // run without indexes on unsearched columns (6, 11-25, 27-45, 47+)
+        // run without indexes on unsearched columns (12, 31, 32, 47) 
 
         [Benchmark]
         [BenchmarkCategory("seven", "req", "bool", "int")]
@@ -21,7 +21,7 @@ namespace ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests
     {
         // run with indexes
         // run without indexes on columns 1 and 40
-        // run without indexes on unsearched columns (4-6, 8-34, 37, 39)
+        // run without indexes on unsearched columns (4, 6, 37, 39)
 
         [Benchmark]
         [BenchmarkCategory("one", "req", "buildupon", "string")]

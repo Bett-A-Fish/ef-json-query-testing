@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.miscTests-20220708-164651</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.301
+  [Host]     : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+  DefaultJob : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                               Method</th><th>                             Categories</th><th> Mean</th><th>Error</th><th>StdDev</th><th>Median</th>
+</tr>
+</thead><tbody><tr><td>Indexed_NoColumns_first_both_bool_int</td><td>Indexed,NoColumns,6fields,both,bool,int</td><td>337.93 ms</td><td>6.630 ms</td><td>9.076 ms</td><td>338.49 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_req_bool_int</td><td>Indexed,NoColumns,7fields,req,bool,int</td><td>43.92 ms</td><td>0.875 ms</td><td>1.644 ms</td><td>43.05 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_op_int</td><td>Indexed,NoColumns,4fields,op,int</td><td>332.40 ms</td><td>6.556 ms</td><td>5.811 ms</td><td>333.38 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_req_string</td><td>Indexed,NoColumns,4fields,req,string</td><td>1,475.95 ms</td><td>11.583 ms</td><td>10.268 ms</td><td>1,472.80 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_op_string</td><td>Indexed,NoColumns,3fields,op,string</td><td>2,561.59 ms</td><td>16.619 ms</td><td>14.732 ms</td><td>2,560.87 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_op_string_single</td><td>Indexed,NoColumns,1fields,op,string</td><td>2,554.74 ms</td><td>15.754 ms</td><td>13.965 ms</td><td>2,551.35 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_req_string_single</td><td>Indexed,NoColumns,1fields,req,string</td><td>1,413.70 ms</td><td>7.828 ms</td><td>6.939 ms</td><td>1,410.61 ms</td>
+</tr><tr><td>Indexed_NoColumns_first_both_date_int_bool</td><td>Indexed,NoColumns,9fields,both,bool,int,date</td><td>315.47 ms</td><td>5.305 ms</td><td>4.702 ms</td><td>313.73 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_req_string</td><td>Indexed,NoColumns,2fields,req,string</td><td>432.84 ms</td><td>8.642 ms</td><td>17.458 ms</td><td>422.66 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_op_string_single</td><td>Indexed,NoColumns,1fields,op,string</td><td>2,588.05 ms</td><td>35.577 ms</td><td>33.278 ms</td><td>2,599.30 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_req_string_single</td><td>Indexed,NoColumns,1fields,req,string</td><td>1,433.07 ms</td><td>28.497 ms</td><td>34.997 ms</td><td>1,415.50 ms</td>
+</tr><tr><td>Indexed_NoColumns_set2_req_string</td><td>Indexed,NoColumns,2fields,req,string</td><td>415.97 ms</td><td>6.713 ms</td><td>5.950 ms</td><td>414.19 ms</td>
+</tr><tr><td>Indexed_NoColumns_set2_req_string_single</td><td>Indexed,NoColumns,1fields,req,string</td><td>1,406.49 ms</td><td>27.769 ms</td><td>29.712 ms</td><td>1,388.86 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_req_date</td><td>Indexed,NoColumns,3fields,req,date</td><td>13.81 ms</td><td>0.166 ms</td><td>0.148 ms</td><td>13.76 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_op_date</td><td>Indexed,NoColumns,2fields,op,date</td><td>38.78 ms</td><td>0.701 ms</td><td>0.656 ms</td><td>39.02 ms</td>
+</tr><tr><td>Indexed_NoColumns_set1_both_date</td><td>Indexed,NoColumns,5fields,both,date</td><td>156.83 ms</td><td>0.935 ms</td><td>0.874 ms</td><td>156.92 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_both_bool_int</td><td>Indexed,AllColumns,6fields,both,bool,int</td><td>334.06 ms</td><td>6.618 ms</td><td>5.526 ms</td><td>335.21 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_req_bool_int</td><td>Indexed,AllColumns,7fields,req,bool,int</td><td>44.82 ms</td><td>0.894 ms</td><td>2.142 ms</td><td>43.96 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_op_int</td><td>Indexed,AllColumns,4fields,op,int</td><td>336.37 ms</td><td>6.638 ms</td><td>9.936 ms</td><td>333.94 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_req_string</td><td>Indexed,AllColumns,4fields,req,string</td><td>1,492.40 ms</td><td>29.226 ms</td><td>32.485 ms</td><td>1,471.27 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_op_string</td><td>Indexed,AllColumns,3fields,op,string</td><td>2,589.51 ms</td><td>37.761 ms</td><td>35.322 ms</td><td>2,593.95 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_op_string_single</td><td>Indexed,AllColumns,1fields,op,string</td><td>2,576.61 ms</td><td>18.100 ms</td><td>16.930 ms</td><td>2,584.21 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_req_string_single</td><td>Indexed,AllColumns,1fields,req,string</td><td>1,431.76 ms</td><td>26.550 ms</td><td>26.075 ms</td><td>1,417.25 ms</td>
+</tr><tr><td>Indexed_AllColumns_first_both_date_int_bool</td><td>Indexed,AllColumns,9fields,both,bool,int,date</td><td>317.12 ms</td><td>6.016 ms</td><td>5.333 ms</td><td>317.41 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_req_string</td><td>Indexed,AllColumns,2fields,req,string</td><td>425.95 ms</td><td>8.372 ms</td><td>8.223 ms</td><td>422.30 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_op_string_single</td><td>Indexed,AllColumns,1fields,op,string</td><td>2,632.07 ms</td><td>32.444 ms</td><td>30.348 ms</td><td>2,641.26 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_req_string_single</td><td>Indexed,AllColumns,1fields,req,string</td><td>1,432.32 ms</td><td>28.484 ms</td><td>26.644 ms</td><td>1,420.37 ms</td>
+</tr><tr><td>Indexed_AllColumns_set2_req_string</td><td>Indexed,AllColumns,2fields,req,string</td><td>423.53 ms</td><td>8.339 ms</td><td>11.415 ms</td><td>418.08 ms</td>
+</tr><tr><td>Indexed_AllColumns_set2_req_string_single</td><td>Indexed,AllColumns,1fields,req,string</td><td>1,419.59 ms</td><td>27.272 ms</td><td>29.180 ms</td><td>1,404.64 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_req_date</td><td>Indexed,AllColumns,3fields,req,date</td><td>23.42 ms</td><td>0.372 ms</td><td>0.545 ms</td><td>23.27 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_op_date</td><td>Indexed,AllColumns,2fields,op,date</td><td>44.23 ms</td><td>0.865 ms</td><td>1.372 ms</td><td>43.74 ms</td>
+</tr><tr><td>Indexed_AllColumns_set1_both_date</td><td>Indexed,AllColumns,5fields,both,date</td><td>161.06 ms</td><td>2.249 ms</td><td>2.310 ms</td><td>160.79 ms</td>
+</tr></tbody></table>
+</body>
+</html>

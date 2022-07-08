@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ef_json_query_testing.Benchmarks.MultiSearch.HardCodedValueTests.JsonIndexStringBenchmarks-20220708-145557</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19043.1766 (21H1/May2021Update)
+AMD Ryzen 7 1700, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.301
+  [Host]     : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+  DefaultJob : .NET 6.0.6 (6.0.622.26707), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>           Method</th><th>         Categories</th><th> Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>Json_Req_One_BuildUpon</td><td>one,req,buildupon,string</td><td>26.19 ms</td><td>0.514 ms</td><td>0.815 ms</td>
+</tr><tr><td>Json_Req_Four_BuildUpon</td><td>four,req,buildupon,string</td><td>1,287.24 ms</td><td>25.100 ms</td><td>31.744 ms</td>
+</tr><tr><td>Json_Op_One_BuildUpon</td><td>one,op,buildupon,string</td><td>167.23 ms</td><td>1.338 ms</td><td>1.117 ms</td>
+</tr><tr><td>Json_Op_Four_BuildUpon</td><td>four,op,buildupon,string</td><td>4,807.72 ms</td><td>17.832 ms</td><td>13.922 ms</td>
+</tr></tbody></table>
+</body>
+</html>
