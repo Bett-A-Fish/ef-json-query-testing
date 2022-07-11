@@ -24,10 +24,11 @@
       - [String Categories](#string-categories)
       - [Normal](#normal)
       - [Build Upon](#build-upon)
-      - [Short String](#short-string)
-      - [Long String](#long-string)
+      - [Short String & Long String](#short-string--long-string)
       - [Char Count](#char-count)
-      - [With Int](#with-int)
+      - [With Required and Optional Int](#with-required-and-optional-int)
+    - [Json Index](#json-index)
+      - [Index Benchmarks](#index-benchmarks)
 
 ## Data Model
 
@@ -51,7 +52,7 @@ Sad Note: At some point `Media_Dynamic` started getting refered to as just media
 
 I'm using [Bogus](https://github.com/bchavez/Bogus) with a hardcoded seed value to easily create lots of consistent semi-realistic looking data to add into the above data structures. `Media_Dynamic` is created then a selection of `DynamicFields` are used to generate data for the media item into `DynamicMediaInformation`. When all items for `Media_Dynamic` are done, this information is duplicated into `Media_Json` to reduce variables when testing search patterns.
 
-Two large bacpac files have been included that were used to benchmark these search patterns: `ef_testing_index_large.bacpac` and `ef_testing_string_large.bacpac`. The first uses a generated list of 50 different fields including the types: int, bool, date, string. The second is 40 fields of only strings. Both have 100,000 generated rows of data. A new set can be generated with your own seed and data counts using `CreateBogusData.cs`
+Links to two large bacpac files have been included that were used to benchmark these search patterns: `ef_testing_index_large.bacpac` and `ef_testing_string_large.bacpac` which can be found [here](data%20files/database%20file%20links.txt). The first uses a generated list of 50 different fields including the types: int, bool, date, string. The second is 40 fields of only strings with two additional int fields. Both have 100,000 generated rows of data. A new set can be generated with your own seed and data counts using `CreateBogusData.cs`
 
 ### CreateBogusData.cs
 
@@ -74,7 +75,7 @@ Multiple search pattern types were created to see what varients were most effici
 - `JsonSearch_Indexed_NoColumns`
   - Not a big change from `JsonSearch_Indexed` but a business decision changed the information needed to be brought back from the server.
 - `JsonSearch_Indexed_NoColumns_StringAdjustment`
-  - An attempt to see if searching on optional strin fields could be sped up
+  - An attempt to see if searching on optional string fields could be sped up
 - `JsonSearch_Indexed`
   - Similar to `JsonSearch_Raw` but with columns being indexed
   - Note: the testing is setup to make an index for each field but the intention for a production environment would be to only add indexing to the needed fields.
@@ -148,7 +149,7 @@ Single search was mainly used for the original setup of benchmark dotnet and get
 
 ### Multi search
 
-This section has te hard coded and random sections. Originally random values were used for testing but realized the consistency of choosing what would be returned was also valuable information to these tests. So added the hard coded section of tests. The random tests can be used with any database. The hard coded ones can be used with the provided bacpac file: `ef_testing_index_large.bacpac`. Except for `StringBenchmarks.cs` which needs the other bacpac to work: `ef_testing_string_large.bacpac`.
+This section has the hard coded and random sections. Originally random values were used for testing but realized the consistency of choosing what would be returned was also valuable information to these tests. So added the hard coded section of tests. The random tests can be used with any database. The hard coded ones can be used with the provided bacpac file: `ef_testing_index_large.bacpac`. Except for `StringBenchmarks.cs` which needs the other bacpac to work: `ef_testing_string_large.bacpac`.
 
 - Less Random
   - Tests the normal search patterns with specific data to see if the location of the data in the database might have changed search times.
@@ -171,23 +172,32 @@ This section has te hard coded and random sections. Originally random values wer
 - String
   - Tests only `NoColumn` search patterns against different sets of string search values
   - Categories: `media`, `json`, `req`, `op`, `both`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `buildupon`, `shortstring`, `longstring`, `charcount`, `ten`, `twelve`, `fourteen`, `sixteen`, `withint`
+  - Uses `ef_testing_string_large.bacpac`
+- Json Index
+  - These tests require database changes between runs for testing how indexing effects the search speed of different types of searches. 
+  - `JsonIndexBenchmarks` uses `ef_testing_index_large.bacpac` with the required changes per run listed in the class
+  - `JsonIndexStringBenchmarks` uses `ef_testing_string_large.bacpac` with the required changes per run listed in the class
+  - A set of tests only using the json `NoColumn` search pattern
 
 ### Categories
 
 - `first` - given search values to find the first item in the table
 - `last` - given search values to find the last item in the table
-- `set` - values that will return more than one datarow for a search
+- `set#` - values that will return more than one datarow for a search
 - `req` - only searches on columns that are required to be in each row
 - `op` - only searches on columns that are optional for each row
 - `both` - search includes optional and required fields
 - (`int`, `bool`, `string`, `date`) - the types of search values used
-- `#fields` (1,2,3,4,5,6,7,9) - the number of fields searched on
+- `#fields` (1,2,3,4,5,6,7,9) or `number` spelled out - the number of fields searched on
+- `table` or `media` for tests using the dynamic search patterns
+- `json` for tests using the json search patterns
+- Additional benchmark specific categories listed in their respective sections below
 
 ## Results
 
 A lot of the benchmarks included in this project were done before the business decision of not returning the media information. Which vastly improved the speed of the dynamic table search patterns. The test results of these have still been included but will not be reviewed here. These sections include: `Column Count`, `Less Random`, and `Split Query`. While the dynamic search patterns improved with the removal of the column data, the json patterns didn't see much difference, but for the sake of consistency I will focus on the `No Column` version of the json search patterns. However a lot of the test results still include the original version of json and dynamic search so they can be easily compared with the `No Column` versions.
 
-The plots are generated using the included `BuildPlots_alt.R` file.
+The plots are generated using the included `BuildPlots_alt.R` file found [here](data%20files/BuildPlots_alt.R).
 
 ---
 
@@ -403,6 +413,7 @@ These benchmarks use a different database than those above. The file for it has 
 - `longstring` - Same as `buildupon` but each search field uses strings of length 10
 - `charcount` - Each search is over 4 fields with the lengths of the strings increasing in each search
 - `withint` - A copy of `buildupon` with a required int field added onto each search
+- `optionalint` - Similar to `buildupon` with an optional int field added onto each search
 
 ---
 
@@ -587,16 +598,85 @@ This style looks to have worked. As there is no longer any unexpected changes in
 
 ---
 
-#### Short String
+#### Short String & Long String
 
----
+These two benchmarks turned out very similar in speeds. With any difference being quite negligable. The most interesting part of this benchmark is that the `both` tests for the json search pattern actually run faster than the dynamic search patterns. As with previous tests json usually takes longer than the dynamic search. However, I'm unable to explain why this test ended up so different compared to previous runs.
 
-#### Long String
+<details>
+  <summary>Fig 13: String Benchmarks - Short String - Line Plot - Both</summary>
+
+![Fig 13: String Benchmarks - Short String - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20shortstring/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20optional%20and%20required%20fields.png)
+
+</details>
+
+<details>
+  <summary>Fig 14: String Benchmarks - Long String - Line Plot - Both</summary>
+
+  ![Fig 14: String Benchmarks - Long String - Line Plot - Both](readme%20files/results/String/string%20fields%20-%20longstring/String%20Search%20Query%20-%20json%20vs%20media%20with%20combined%20optional%20and%20required%20fields.png)
+
+</details>
 
 ---
 
 #### Char Count
 
+This test was over four fields for each test but with the charecter count for each search changing. This data is displayed in `Fig 15` and shows that each search is very consistent. With the json patterns slightly decreasing with longer strings and dynamic patterns slightly increasing. However these changes can be explained by the error and standard deviation.
+
+<details>
+  <summary>Fig 15: String Benchmarks - Char Count - Line Plot</summary>
+
+![Fig 15: String Benchmarks - Char Count - Line Plot](readme%20files/results/String/string%20fields%20-%20charcount/String%20Search%20Query%20-%20json%20vs%20media.png)
+
+</details>
+
 ---
 
-#### With Int
+#### With Required and Optional Int
+
+The tests `withint` and `optionalint` are similar to the `buildupon` tests but with an int field added onto each search (not included in field counts). This benchmark shows how drastically the search time reduces by having a single non-string field included in the search terms. The full comparison can be seen in `Fig 16` 
+
+However, the times between json and dynamic search patterns are not so different, though json is consistently the faster of the two. This can be seen with `Fig 17` and `Fig 18`.
+
+
+<details>
+  <summary>Fig 16: String Benchmarks - With int Compared to Build Upon - Line Plot - Optional</summary>
+
+![Fig 16: String Benchmarks - With int Compared to Build Upon - Line Plot - Optional](readme%20files/results/String/string%20fields%20-%20withint/String%20Search%20Query%20-%20json%20vs%20media%20with%20optional%20fields%20-%20comparison.png)
+
+</details>
+
+<details>
+  <summary>Fig 17: String Benchmarks - With int - Line Plot - Optional</summary>
+
+![Fig 17: String Benchmarks - With int - Line Plot - Optional](readme%20files/results/String/string%20fields%20-%20withint/String%20Search%20Query%20-%20json%20vs%20media%20with%20Required%20fields.png)
+
+</details>
+
+
+<details>
+  <summary>Fig 18: String Benchmarks - With int - Line Plot - Required</summary>
+
+![Fig 18: String Benchmarks - With int - Line Plot - Required](readme%20files/results/String/string%20fields%20-%20withint/String%20Search%20Query%20-%20json%20vs%20media%20with%20optional%20fields.png)
+
+</details>
+
+---
+
+### Json Index
+
+This ended up being a combination of a few different benchmarks and tests on the two provided databases. Rather than making multiple copies of the tables for the different combination of tests with and without indexing, I simply added and removed the needed indexes between each run of the tests.
+
+
+#### Index Benchmarks
+
+- `JsonIndexBenchmarks` uses `ef_testing_index_large.bacpac`
+  - With indexes - This was used as a baseline run for comparing with removed indexes
+  - Without searched indexes - Removed indexes on columns 1 and 2 that were used in the searches
+  - Without unsearched indexes - Added the removed indexes back and then removed indexes for columns 12, 31, 32, and 47, to cover a combination of required and optional fields.
+- `JsonIndexStringBenchmarks` uses `ef_testing_string_large.bacpac`
+  - With indexes - This was used as a baseline run for comparing with removed indexes
+  - Without searched indexes - Removed indexes on columns 1 and 48 that were used in the searches
+  - Without unsearched indexes - Added the removed indexes back and then removed indexes for columns 4, 6, 37, and 39, to cover a combination of required and optional fields.
+- Misc Test - Uses the Misc Benchmarks file
+  - Baseline - A normal run of the Misc benchmarks to use as comparison
+  - No indexing - A run of the Misc Benchmarks after all indexes on the database have been removed
