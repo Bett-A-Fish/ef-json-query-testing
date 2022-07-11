@@ -29,6 +29,10 @@
       - [With Required and Optional Int](#with-required-and-optional-int)
     - [Json Index](#json-index)
       - [Index Benchmarks](#index-benchmarks)
+      - [Json Index](#json-index-1)
+      - [Json Index String](#json-index-string)
+  - [</details>](#details)
+      - [Misc Test](#misc-test)
 
 ## Data Model
 
@@ -652,7 +656,6 @@ However, the times between json and dynamic search patterns are not so different
 
 </details>
 
-
 <details>
   <summary>Fig 18: String Benchmarks - With int - Line Plot - Required</summary>
 
@@ -680,3 +683,37 @@ This ended up being a combination of a few different benchmarks and tests on the
 - Misc Test - Uses the Misc Benchmarks file
   - Baseline - A normal run of the Misc benchmarks to use as comparison
   - No indexing - A run of the Misc Benchmarks after all indexes on the database have been removed
+
+---
+
+#### Json Index
+
+This benchmark uses `ef_testing_index_large.bacpac`. And was ran three times: All columns indexed, some searched fields with indexes removed, and once with all search fields having indexes and some that were not searched having indexes removed.
+
+In this test I focused on basic data types, Int and Bool. `Fig 19` shows how including indexes on these columns types is negligable for required and optional fields.
+
+
+<details>
+  <summary>Fig 19: Json Index Benchmarks - Box Plot</summary>
+
+![Fig 19: Json Index Benchmarks - Box Plot](readme%20files/results/Index%20Testing/json%20index/JsonIndexBenchmarks-All-boxplot.png)
+
+</details>
+
+---
+
+#### Json Index String
+
+This benchmark uses `ef_testing_string_large.bacpac`. And was ran three times: All columns indexed, some searched fields with indexes removed, and once with all search fields having indexes and some that were not searched having indexes removed. `Fig 20` shows how including indexes on these searches was negligable for required and optional fields. 
+
+<details>
+  <summary>Fig 20: Json Index String Benchmarks - Box Plot</summary>
+
+![Fig 20: Json Index String Benchmarks - Box Plot](readme%20files/results/Index%20Testing/json%20index%20string/JsonIndexStringBenchmarks-All-boxplot.png)
+
+</details>
+---
+
+#### Misc Test
+
+After the previous two benchmarks seemed to display that indexing was not necessary, I decided to run a more thorough test using the Misc benchmarks. Once with all indexes included to be the baseline for comparison, and once with all indexes removed to see if there were specfic cases where indexing improved performance.
