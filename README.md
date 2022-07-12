@@ -31,7 +31,6 @@
       - [Index Benchmarks](#index-benchmarks)
       - [Json Index](#json-index-1)
       - [Json Index String](#json-index-string)
-  - [</details>](#details)
       - [Misc Test](#misc-test)
 
 ## Data Model
@@ -712,8 +711,59 @@ This benchmark uses `ef_testing_string_large.bacpac`. And was ran three times: A
 ![Fig 20: Json Index String Benchmarks - Box Plot](readme%20files/results/Index%20Testing/json%20index%20string/JsonIndexStringBenchmarks-All-boxplot.png)
 
 </details>
+
 ---
 
 #### Misc Test
 
 After the previous two benchmarks seemed to display that indexing was not necessary, I decided to run a more thorough test using the Misc benchmarks. Once with all indexes included to be the baseline for comparison, and once with all indexes removed to see if there were specfic cases where indexing improved performance.
+
+`Tbl 8` shows the results of both runs, `Baseline` and `NotIndexed`. With most comparisons showing not enough change to make a difference. It looks like the only columns that see any improvement in search time with an index are optional primitive fields.
+
+<details>
+  <summary>Tbl 8: Json Index Misc Benchmarks</summary>
+
+|                               Method |                  Categories |        Mean |     Error |    StdDev |
+|------------------------------------- |---------------------------- |------------:|----------:|----------:|
+|          BaseLine_first_req_bool_int |        7fields,req,bool,int |     7.46 ms |  0.148 ms |  0.363 ms |
+|        NotIndexed_first_req_bool_int |        7fields,req,bool,int |    43.92 ms |  0.875 ms |  1.644 ms |
+|                BaseLine_first_op_int |              4fields,op,int |     3.89 ms |  0.078 ms |  0.180 ms |
+|              NotIndexed_first_op_int |              4fields,op,int |   332.40 ms |  6.556 ms |  5.811 ms |
+|         BaseLine_first_both_bool_int |       6fields,both,bool,int |     4.53 ms |  0.089 ms |  0.122 ms |
+|       NotIndexed_first_both_bool_int |       6fields,both,bool,int |   337.93 ms |  6.630 ms |  9.076 ms |
+|               BaseLine_set1_req_date |            3fields,req,date |    13.23 ms |  0.262 ms |  0.269 ms |
+|             NotIndexed_set1_req_date |            3fields,req,date |    13.81 ms |  0.166 ms |  0.148 ms |
+|                BaseLine_set1_op_date |             2fields,op,date |    38.54 ms |  0.649 ms |  0.607 ms |
+|              NotIndexed_set1_op_date |             2fields,op,date |    38.78 ms |  0.701 ms |  0.656 ms |
+|              BaseLine_set1_both_date |           5fields,both,date |   157.39 ms |  3.027 ms |  2.683 ms |
+|            NotIndexed_set1_both_date |           5fields,both,date |   156.83 ms |  0.935 ms |  0.874 ms |
+|    BaseLine_first_both_date_int_bool |  9fields,both,bool,int,date |    14.83 ms |  0.295 ms |  0.384 ms |
+|  NotIndexed_first_both_date_int_bool |  9fields,both,bool,int,date |   315.47 ms |  5.305 ms |  4.702 ms |
+|     BaseLine_first_req_string_single |          1fields,req,string | 1,417.21 ms |  9.897 ms |  9.257 ms |
+|   NotIndexed_first_req_string_single |          1fields,req,string | 1,413.70 ms |  7.828 ms |  6.939 ms |
+|      BaseLine_set1_req_string_single |          1fields,req,string | 1,412.81 ms | 10.720 ms | 10.027 ms |
+|    NotIndexed_set1_req_string_single |          1fields,req,string | 1,433.07 ms | 28.497 ms | 34.997 ms |
+|      BaseLine_set2_req_string_single |          1fields,req,string | 1,388.77 ms |  9.584 ms |  8.965 ms |
+|    NotIndexed_set2_req_string_single |          1fields,req,string | 1,406.49 ms | 27.769 ms | 29.712 ms |
+|             BaseLine_set1_req_string |          2fields,req,string |   417.36 ms |  4.475 ms |  3.967 ms |
+|           NotIndexed_set1_req_string |          2fields,req,string |   432.84 ms |  8.642 ms | 17.458 ms |
+|             BaseLine_set2_req_string |          2fields,req,string |   413.73 ms |  3.119 ms |  2.605 ms |
+|           NotIndexed_set2_req_string |          2fields,req,string |   415.97 ms |  6.713 ms |  5.950 ms |
+|            BaseLine_first_req_string |          4fields,req,string | 1,474.58 ms |  9.438 ms |  8.367 ms |
+|          NotIndexed_first_req_string |          4fields,req,string | 1,475.95 ms | 11.583 ms | 10.268 ms |
+|       BaseLine_set1_op_string_single |           1fields,op,string | 2,616.05 ms | 51.374 ms | 88.617 ms |
+|     NotIndexed_set1_op_string_single |           1fields,op,string | 2,588.05 ms | 35.577 ms | 33.278 ms |
+|      BaseLine_first_op_string_single |           1fields,op,string | 2,548.62 ms | 13.041 ms | 11.560 ms |
+|    NotIndexed_first_op_string_single |           1fields,op,string | 2,554.74 ms | 15.754 ms | 13.965 ms |
+|             BaseLine_first_op_string |           3fields,op,string | 2,553.84 ms | 16.913 ms | 14.993 ms |
+|           NotIndexed_first_op_string |           3fields,op,string | 2,561.59 ms | 16.619 ms | 14.732 ms |
+
+  
+</details>
+
+<details>
+  <summary>Fig 21: Json Index Misc Benchmarks - Box Plot</summary>
+
+![Fig 21: Json Index Misc Benchmarks - Box Plot](readme%20files/results/Index%20Testing/misc%20test/miscTests-All-boxplot-line.png)
+
+</details>
