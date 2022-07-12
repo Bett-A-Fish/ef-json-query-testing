@@ -27,9 +27,9 @@
       - [Short String & Long String](#short-string--long-string)
       - [Char Count](#char-count)
       - [With Required and Optional Int](#with-required-and-optional-int)
-    - [Json Index](#json-index)
+    - [Json Index Benchmarks](#json-index-benchmarks)
       - [Index Benchmarks](#index-benchmarks)
-      - [Json Index](#json-index-1)
+      - [Json Index](#json-index)
       - [Json Index String](#json-index-string)
       - [Misc Test](#misc-test)
 
@@ -39,7 +39,7 @@ I'm using the below structure to mimic what an ad hock query builder could use f
 
 ![Ad hock query builder structure](readme%20files/dataModel/querybuilder.png)
 
-The structure for testing searching where each bit of information is saved as a seprate row in a table.
+The structure for testing searching where each bit of information is saved as a separate row in a table.
 
 ![Dynamic table structure](readme%20files/dataModel/media.png)
 
@@ -49,7 +49,7 @@ The structure for testing searching with the information stored in JSON.
 
 Note: The dynamic table and json structures are separated into different models: `Media_Dynamic` and `Media_Json`
 
-Sad Note: At some point `Media_Dynamic` started getting refered to as just media. While `Media_Json` is refered to as json. Tying to get this cleaned up.
+Sad Note: At some point `Media_Dynamic` started getting referred to as just media. While `Media_Json` is referred to as json. Tying to get this cleaned up.
 
 ## Test Data
 
@@ -61,9 +61,9 @@ Links to two large bacpac files have been included that were used to benchmark t
 
 The field `FakerSeed` is the seed used for generating the bogus data.
 
-`LoadAllData` Can be called to fill the whole database in one go. `fieldsCount` Will be the list of available dynamic fields each datarow has available with random datatypes and sets if the fields are required or optional. `mediaItemsCount` Is the total number of datarows to be able to search over which will be created for one table structure and duplicated into the other. `listTypeCount` For generating some dropdown types and the list of options available for each.
+`LoadAllData` Can be called to fill the whole database in one go. `fieldsCount` Will be the list of available dynamic fields each row has available with random data types and sets if the fields are required or optional. `mediaItemsCount` Is the total number of rows to be able to search over which will be created for one table structure and duplicated into the other. `listTypeCount` For generating some dropdown types and the list of options available for each.
 
-`LoadSharedData` Loads the data for the ad hock query builder portion of the database. Filling out the available fields a datarow can contain. The parameters are the same as above.
+`LoadSharedData` Loads the data for the ad hock query builder portion of the database. Filling out the available fields a row can contain. The parameters are the same as above.
 
 `LoadMediaData` Loads the data for the Dynamic and Json tables for running searches against. First it will create data for the dynamic table, then copy that data into the json table.
 
@@ -71,7 +71,7 @@ Some extra private "large" versions of methods are included that I used to gener
 
 ## Search Patterns
 
-Multiple search pattern types were created to see what varients were most efficient. The intent is to see how each handles different search patterns, however all of the below are currently only setup to handle a basic `AND` search rather than the full query builder outlined above. For each pattern, unit tests were added to allow easily checking their validity along with how they each handle bad user input using [NaughtyStrings](https://github.com/SimonCropp/NaughtyStrings). As benchmarking has progressed, more varients have been added and older ones deemed consistently worse than similar counterparts were moved out of the way into `SearchServiceOld.cs`.
+Multiple search pattern types were created to see what variants were most efficient. The intent is to see how each handles different search patterns, however all of the below are currently only setup to handle a basic `AND` search rather than the full query builder outlined above. For each pattern, unit tests were added to allow easily checking their validity along with how they each handle bad user input using [NaughtyStrings](https://github.com/SimonCropp/NaughtyStrings). As benchmarking has progressed, more variants have been added and older ones deemed consistently worse than similar counterparts were moved out of the way into `SearchServiceOld.cs`.
 
 ### Json Patterns
 
@@ -148,7 +148,7 @@ Unit tests are included to make sure each search works as expected and can handl
 
 ### Single search
 
-Single search was mainly used for the original setup of benchmark dotnet and getting a basis started for search patterns. All of these were quickly dropped for multi search versions if possible. Though these arent used anymore, they are still available.
+Single search was mainly used for the original setup of benchmark dotnet and getting a basis started for search patterns. All of these were quickly dropped for multi search versions if possible. Though these aren't used anymore, they are still available.
 
 ### Multi search
 
@@ -164,7 +164,7 @@ This section has the hard coded and random sections. Originally random values we
   - Tests the normal json against the "normal", `SplitQuery`, and `TwoQueries` versions of the dynamic search patterns. (`SplitQuery` was consistently worse than everything, `TwoQueries` was better, but json still out performed)
   - Categories: `table`, `json`, `indexed`, `media`, `media2`, `mediasplit`, `first`, `last`, `set1`, `set2`
 - No Columns
-  - Tests normal and `NoColumns` versions of the search patterns. (Vast improvement to dynamic search times, json didnt change)
+  - Tests normal and `NoColumns` versions of the search patterns. (Vast improvement to dynamic search times, json didn't change)
   - Categories: `table`, `json`, `hascolumns`, `nocolumns`, `first`, `last`, `set1`, `set2`
 - Date Field
   - Tests the normal and `NoColumns` versions of the search patterns against date fields
@@ -177,7 +177,7 @@ This section has the hard coded and random sections. Originally random values we
   - Categories: `media`, `json`, `req`, `op`, `both`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `buildupon`, `shortstring`, `longstring`, `charcount`, `ten`, `twelve`, `fourteen`, `sixteen`, `withint`
   - Uses `ef_testing_string_large.bacpac`
 - Json Index
-  - These tests require database changes between runs for testing how indexing effects the search speed of different types of searches. 
+  - These tests require database changes between runs for testing how indexing effects the search speed of different types of searches.
   - `JsonIndexBenchmarks` uses `ef_testing_index_large.bacpac` with the required changes per run listed in the class
   - `JsonIndexStringBenchmarks` uses `ef_testing_string_large.bacpac` with the required changes per run listed in the class
   - A set of tests only using the json `NoColumn` search pattern
@@ -186,7 +186,7 @@ This section has the hard coded and random sections. Originally random values we
 
 - `first` - given search values to find the first item in the table
 - `last` - given search values to find the last item in the table
-- `set#` - values that will return more than one datarow for a search
+- `set#` - values that will return more than one row for a search
 - `req` - only searches on columns that are required to be in each row
 - `op` - only searches on columns that are optional for each row
 - `both` - search includes optional and required fields
@@ -603,7 +603,7 @@ This style looks to have worked. As there is no longer any unexpected changes in
 
 #### Short String & Long String
 
-These two benchmarks turned out very similar in speeds. With any difference being quite negligable. The most interesting part of this benchmark is that the `both` tests for the json search pattern actually run faster than the dynamic search patterns. As with previous tests json usually takes longer than the dynamic search. However, I'm unable to explain why this test ended up so different compared to previous runs.
+These two benchmarks turned out very similar in speeds. With any difference being quite negligible. The most interesting part of this benchmark is that the `both` tests for the json search pattern actually run faster than the dynamic search patterns. As with previous tests json usually takes longer than the dynamic search. However, I'm unable to explain why this test ended up so different compared to previous runs.
 
 <details>
   <summary>Fig 13: String Benchmarks - Short String - Line Plot - Both</summary>
@@ -623,7 +623,7 @@ These two benchmarks turned out very similar in speeds. With any difference bein
 
 #### Char Count
 
-This test was over four fields for each test but with the charecter count for each search changing. This data is displayed in `Fig 15` and shows that each search is very consistent. With the json patterns slightly decreasing with longer strings and dynamic patterns slightly increasing. However these changes can be explained by the error and standard deviation.
+This test was over four fields for each test but with the character count for each search changing. This data is displayed in `Fig 15` and shows that each search is very consistent. With the json patterns slightly decreasing with longer strings and dynamic patterns slightly increasing. However these changes can be explained by the error and standard deviation.
 
 <details>
   <summary>Fig 15: String Benchmarks - Char Count - Line Plot</summary>
@@ -636,10 +636,9 @@ This test was over four fields for each test but with the charecter count for ea
 
 #### With Required and Optional Int
 
-The tests `withint` and `optionalint` are similar to the `buildupon` tests but with an int field added onto each search (not included in field counts). This benchmark shows how drastically the search time reduces by having a single non-string field included in the search terms. The full comparison can be seen in `Fig 16` 
+The tests `withint` and `optionalint` are similar to the `buildupon` tests but with an int field added onto each search (not included in field counts). This benchmark shows how drastically the search time reduces by having a single non-string field included in the search terms. The full comparison can be seen in `Fig 16`.
 
 However, the times between json and dynamic search patterns are not so different, though json is consistently the faster of the two. This can be seen with `Fig 17` and `Fig 18`.
-
 
 <details>
   <summary>Fig 16: String Benchmarks - With int Compared to Build Upon - Line Plot - Optional</summary>
@@ -664,10 +663,9 @@ However, the times between json and dynamic search patterns are not so different
 
 ---
 
-### Json Index
+### Json Index Benchmarks
 
 This ended up being a combination of a few different benchmarks and tests on the two provided databases. Rather than making multiple copies of the tables for the different combination of tests with and without indexing, I simply added and removed the needed indexes between each run of the tests.
-
 
 #### Index Benchmarks
 
@@ -689,8 +687,7 @@ This ended up being a combination of a few different benchmarks and tests on the
 
 This benchmark uses `ef_testing_index_large.bacpac`. And was ran three times: All columns indexed, some searched fields with indexes removed, and once with all search fields having indexes and some that were not searched having indexes removed.
 
-In this test I focused on basic data types, Int and Bool. `Fig 19` shows how including indexes on these columns types is negligable for required and optional fields.
-
+In this test I focused on basic data types, Int and Bool. `Fig 19` shows how including indexes on these columns types is negligible for required and optional fields.
 
 <details>
   <summary>Fig 19: Json Index Benchmarks - Box Plot</summary>
@@ -703,7 +700,7 @@ In this test I focused on basic data types, Int and Bool. `Fig 19` shows how inc
 
 #### Json Index String
 
-This benchmark uses `ef_testing_string_large.bacpac`. And was ran three times: All columns indexed, some searched fields with indexes removed, and once with all search fields having indexes and some that were not searched having indexes removed. `Fig 20` shows how including indexes on these searches was negligable for required and optional fields. 
+This benchmark uses `ef_testing_string_large.bacpac`. And was ran three times: All columns indexed, some searched fields with indexes removed, and once with all search fields having indexes and some that were not searched having indexes removed. `Fig 20` shows how including indexes on these searches was negligible for required and optional fields.
 
 <details>
   <summary>Fig 20: Json Index String Benchmarks - Box Plot</summary>
@@ -716,7 +713,7 @@ This benchmark uses `ef_testing_string_large.bacpac`. And was ran three times: A
 
 #### Misc Test
 
-After the previous two benchmarks seemed to display that indexing was not necessary, I decided to run a more thorough test using the Misc benchmarks. Once with all indexes included to be the baseline for comparison, and once with all indexes removed to see if there were specfic cases where indexing improved performance.
+After the previous two benchmarks seemed to display that indexing was not necessary, I decided to run a more thorough test using the Misc benchmarks. Once with all indexes included to be the baseline for comparison, and once with all indexes removed to see if there were specific cases where indexing improved performance.
 
 `Tbl 8` shows the results of both runs, `Baseline` and `NotIndexed`. With most comparisons showing not enough change to make a difference. It looks like the only columns that see any improvement in search time with an index are optional primitive fields.
 
@@ -758,7 +755,6 @@ After the previous two benchmarks seemed to display that indexing was not necess
 |             BaseLine_first_op_string |           3fields,op,string | 2,553.84 ms | 16.913 ms | 14.993 ms |
 |           NotIndexed_first_op_string |           3fields,op,string | 2,561.59 ms | 16.619 ms | 14.732 ms |
 
-  
 </details>
 
 <details>

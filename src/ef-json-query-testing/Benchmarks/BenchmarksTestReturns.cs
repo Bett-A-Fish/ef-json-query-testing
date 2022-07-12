@@ -10,7 +10,6 @@ namespace ef_json_query_testing.Benchmarks
             TestSearch((a) => Search.JsonSearch_Indexed(a), (b) => Search.TableSearch_Media(b));
             TestSearch((a) => Search.JsonSearch_Indexed(a), (b) => Search.TableSearch_Media_SplitQuery(b));
             TestSearch((a) => Search.JsonSearch_Indexed(a), (b) => Search.TableSearch_Media_TwoQueries(b));
-            int it = 0;
         }
 
 

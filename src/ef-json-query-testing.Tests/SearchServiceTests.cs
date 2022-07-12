@@ -33,7 +33,7 @@ namespace ef_json_query_testing.Tests
                 { 0, "d" }
             } };
 
-            // DynamicFields exsits, but no match
+            // DynamicFields exists, but no match
             yield return new object[] { new Dictionary<int, string>() {
                 { 1, "0" },
                 { 2, "0" }
@@ -188,7 +188,7 @@ namespace ef_json_query_testing.Tests
 
         [Theory]
         [InlineData(0, "asd")] // DynamicFields doesnt exist
-        [InlineData(1, "0")] // DynamicFields exsits, but no match
+        [InlineData(1, "0")] // DynamicFields exists, but no match
         [InlineData(6, "22")] // DynamicFields exists, value exists but doesnt match exactly
         public void Raw_Single_NoMatch(int FieldId, string searchValue)
         {
@@ -219,7 +219,7 @@ namespace ef_json_query_testing.Tests
         [InlineData(10, "time", new[] { 1 })]
         [InlineData(10, "B", new[] { 2, 3, 4 })] // case doesnt matter for search
         [InlineData(12, "i", new[] { 1, 2, 3, 4, 5 })] // anywhere in sentence works
-        [InlineData(12, "is?", new[] { 2 })] // special charecers
+        [InlineData(12, "is?", new[] { 2 })] // special characters
         [InlineData(12, "'", new[] { 2, 4 })] // sql string char
         [InlineData(12, "chain of command", new[] { 2 })] // multiple words
         public void Raw_Single_Contains(int fieldId, string str, int[] expectedIds)
@@ -470,7 +470,7 @@ namespace ef_json_query_testing.Tests
 
         [Theory]
         [InlineData(0, "asd")] // DynamicFields doesnt exist
-        [InlineData(1, "asd")] // DynamicFields exsits, but no match
+        [InlineData(1, "asd")] // DynamicFields exists, but no match
         [InlineData(2, "asd")] // DynamicFields exists, but no media has the field.
         [InlineData(6, "22")] // DynamicFields exists, value exists but doesnt match exactly
         public void Magic_Single_NoMatch(int FieldId, string searchValue)
@@ -502,7 +502,7 @@ namespace ef_json_query_testing.Tests
         [InlineData(10, "time", new[] { 1 })]
         [InlineData(10, "B", new[] { 2, 3, 4 })] // case doesnt matter for search
         [InlineData(12, "i", new[] { 1, 2, 3, 4, 5 })] // anywhere in sentence works
-        [InlineData(12, "is?", new[] { 2 })] // special charecers
+        [InlineData(12, "is?", new[] { 2 })] // special characters
         [InlineData(12, "'", new[] { 2, 4 })] // sql string char
         [InlineData(12, "chain of command", new[] { 2 })] // multiple words
         public void Magic_Single_Contains(int fieldId, string str, int[] expectedIds)
@@ -613,7 +613,7 @@ namespace ef_json_query_testing.Tests
 
         [Theory]
         [InlineData(0, "asd")] // DynamicFields doesnt exist
-        [InlineData(1, "asd")] // DynamicFields exsits, but no match
+        [InlineData(1, "asd")] // DynamicFields exists, but no match
         [InlineData(2, "asd")] // DynamicFields exists, but no media has the field.
         [InlineData(6, "22")] // DynamicFields exists, value exists but doesnt match exactly
         public void Info_Single_NoMatch(int FieldId, string searchValue)
@@ -645,7 +645,7 @@ namespace ef_json_query_testing.Tests
         [InlineData(10, "time", new[] { 1 })]
         [InlineData(10, "B", new[] { 2, 3, 4 })] // case doesnt matter for search
         [InlineData(12, "i", new[] { 1, 2, 3, 4, 5 })] // anywhere in sentence works
-        [InlineData(12, "is?", new[] { 2 })] // special charecers
+        [InlineData(12, "is?", new[] { 2 })] // special characters
         [InlineData(12, "'", new[] { 2, 4 })] // sql string char
         [InlineData(12, "chain of command", new[] { 2 })] // multiple words
         public void Info_Single_Contains(int fieldId, string str, int[] expectedIds)
@@ -681,7 +681,7 @@ namespace ef_json_query_testing.Tests
 
         [Theory]
         [InlineData(0, "asd")] // DynamicFields doesnt exist
-        [InlineData(1, "asd")] // DynamicFields exsits, but no match
+        [InlineData(1, "asd")] // DynamicFields exists, but no match
         [InlineData(2, "asd")] // DynamicFields exists, but no media has the field.
         [InlineData(6, "22")] // DynamicFields exists, value exists but doesnt match exactly
         public void Media_Single_NoMatch(int FieldId, string searchValue)
@@ -713,7 +713,7 @@ namespace ef_json_query_testing.Tests
         [InlineData(10, "time", new[] { 1 })]
         [InlineData(10, "B", new[] { 2, 3, 4 })] // case doesnt matter for search
         [InlineData(12, "i", new[] { 1, 2, 3, 4, 5 })] // anywhere in sentence works
-        [InlineData(12, "is?", new[] { 2 })] // special charecers
+        [InlineData(12, "is?", new[] { 2 })] // special characters
         [InlineData(12, "'", new[] { 2, 4 })] // sql string char
         [InlineData(12, "chain of command", new[] { 2 })] // multiple words
         public void Media_Single_Contains(int fieldId, string str, int[] expectedIds)
