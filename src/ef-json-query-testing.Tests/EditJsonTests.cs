@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using ef_json_query_testing.Models;
+using ef_json_query_testing.Seeders;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,9 @@ namespace ef_json_query_testing.Tests
         [Fact]
         public void ShouldUpdateExpectedField()
         {
-            var item = _fixture.Context.Media_Json.FirstOrDefault();
+            var id = AddTestItem();
+
+            var item = _fixture.Context.Media_Json.FirstOrDefault(j => j.Media_JsonId == id);
             var originalDict = item.Details.ToDictionary(k => k.Key, k => k.Value);
             var changeField = _fixture.Context.DynamicFields.FirstOrDefault(d => d.IsRequired && d.DataType == Enums.DataTypes.IntValue);
             var detailEditKey = changeField.DynamicFieldId.ToString();
@@ -48,13 +52,16 @@ namespace ef_json_query_testing.Tests
             originalDict.Remove(detailEditKey);
             savedDict.Remove(detailEditKey);
             originalDict.Should().BeEquivalentTo(savedDict);
-        }
 
+            RemoveTestItem(id);
+        }
 
         [Fact]
         public void ShouldUpdateExpectedFields()
         {
-            var item = _fixture.Context.Media_Json.FirstOrDefault();
+            var id = AddTestItem();
+
+            var item = _fixture.Context.Media_Json.FirstOrDefault(j => j.Media_JsonId == id);
             var originalDict = item.Details.ToDictionary(k => k.Key, k => k.Value);
 
             var fields = originalDict.Select(o => o.Key);
@@ -115,14 +122,16 @@ namespace ef_json_query_testing.Tests
             savedDict.Remove(dateFieldId);
 
             originalDict.Should().BeEquivalentTo(savedDict);
+
+            RemoveTestItem(id);
         }
-
-
 
         [Fact]
         public void ShouldRemoveExpectedField()
         {
-            var item = _fixture.Context.Media_Json.FirstOrDefault();
+            var id = AddTestItem();
+
+            var item = _fixture.Context.Media_Json.FirstOrDefault(j => j.Media_JsonId == id);
             var originalDict = item.Details.ToDictionary(k => k.Key, k => k.Value);
             var changeField = _fixture.Context.DynamicFields.FirstOrDefault(d => d.IsRequired && d.DataType == Enums.DataTypes.IntValue);
             var detailEditKey = changeField.DynamicFieldId.ToString();
@@ -146,6 +155,44 @@ namespace ef_json_query_testing.Tests
 
             originalDict.Remove(detailEditKey);
             originalDict.Should().BeEquivalentTo(savedDict);
+
+            RemoveTestItem(id);
+        }
+
+        public int AddTestItem()
+        {
+            var item = CreateBogusData.FakerMedia_Dynamic.Generate(1).FirstOrDefault();
+
+            var info = new List<DynamicMediaInformation> {
+                new DynamicMediaInformation(0, 1, "1"), // R, list (1-5)
+                new DynamicMediaInformation(0, 3, "9"), // R, list (9-15)
+                new DynamicMediaInformation(0, 4, "16"), // R, list (16-20)
+                new DynamicMediaInformation(0, 6, "2"), // R, int
+                new DynamicMediaInformation(0, 8, "111"), // R, int
+                new DynamicMediaInformation(0, 10, "my time"), // R, str
+                new DynamicMediaInformation(0, 12, "I swear by my pretty floral bonnet, I will end you."), // R. str
+                new DynamicMediaInformation(0, 14, "1"), // R, bool
+                new DynamicMediaInformation(0, 16, "1"), // R, bool
+                new DynamicMediaInformation(0, 18, "0946-05-28T02:17:27.0000000"), // R, Datetime
+                new DynamicMediaInformation(0, 20, "1082-09-23T20:01:08.0000000"), // R, Datetime
+            };
+
+            item.DynamicMediaInformation = info;
+
+            var jsonCopy = item.GetMediaJsonCopy(false);
+
+            _fixture.Context.Media_Json.Add(jsonCopy);
+            _fixture.Context.SaveChanges();
+
+            return jsonCopy.Media_JsonId;
+        }
+
+        public void RemoveTestItem(int id)
+        {
+            var item = _fixture.Context.Media_Json.FirstOrDefault(j => j.Media_JsonId == id);
+
+            _fixture.Context.Media_Json.Remove(item);
+            _fixture.Context.SaveChanges();
         }
     }
 }
